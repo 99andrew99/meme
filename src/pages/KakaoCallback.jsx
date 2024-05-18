@@ -57,7 +57,7 @@ const KakaoCallback = () => {
                     })
                         .then((response) => response.json())
                         .then((userData) => {
-                            // console.log("유저 데이터: ", userData);
+                            console.log("유저 데이터: ", userData);
                             // console.log(
                             //     "카카오 이메일: ",
                             //     userData.kakao_account.email
@@ -69,6 +69,9 @@ const KakaoCallback = () => {
                             const user = {
                                 name: userData.kakao_account.profile.nickname,
                                 email: userData.kakao_account.email,
+                                profileImg:
+                                    userData.kakao_account.profile
+                                        .profile_image_url,
                             };
 
                             const authInfo = {

@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { authState } from "../atoms/authState";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const TopContainer = styled.div`
     width: 100vw;
@@ -22,6 +22,10 @@ const ContentsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 480px) {
+        width: 100vw;
+    }
 `;
 
 const WelcomeText = styled.p`
@@ -39,8 +43,27 @@ const TitleContainer = styled.div``;
 
 const MemeContainer = styled.div``;
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
 const MemeText = styled.p`
     text-align: center;
+    animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 1.5s ease-in-out;
 `;
 
 const TeamNameContainer = styled.div``;
@@ -58,6 +81,17 @@ function Signup() {
     const { user } = useRecoilValue(authState);
     const navigate = useNavigate();
 
+    const memeTexts = [
+        "꽁꽁 얼어붙은 한강 위로 고양이가 걸어다닙니다",
+        "탕탕 후루후루 탕탕 후루루루루",
+        "어쩌구저쩌구 하지 말고 맞다이로 들어와",
+        "야레야레, 못 말리는 아가씨",
+        "바래다줄게. 바래? 다 줄게",
+    ];
+
+    const [currentMemeIndex, setCurrentMemeIndex] = useState(0);
+    const [visible, setVisible] = useState(true);
+
     useEffect(() => {
         console.log(user);
         if (user && window.Kakao.Auth.getAccessToken()) {
@@ -72,6 +106,20 @@ function Signup() {
         });
     };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setVisible(false);
+            setTimeout(() => {
+                setCurrentMemeIndex((prevIndex) =>
+                    prevIndex === memeTexts.length - 1 ? 0 : prevIndex + 1
+                );
+                setVisible(true);
+            }, 1500); // fadeOut 애니메이션이 끝날 때까지 대기
+        }, 3000); // 3초 간격으로 변경
+
+        return () => clearInterval(interval);
+    }, [memeTexts.length]);
+
     return (
         <TopContainer>
             <ContentsContainer>
@@ -80,8 +128,8 @@ function Signup() {
                     <InfoText>서비스를 소개하는 문구입니다.</InfoText>
                 </TitleContainer>
                 <MemeContainer>
-                    <MemeText>
-                        여기 텍스트 밈 한줄 랜덤으로 띄워주고싶어요!
+                    <MemeText visible={visible}>
+                        {memeTexts[currentMemeIndex]}
                     </MemeText>
                 </MemeContainer>
             </ContentsContainer>

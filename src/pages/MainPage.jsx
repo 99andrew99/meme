@@ -15,10 +15,21 @@ const TopContainer = styled.div`
     background-color: black;
 `;
 
-const Temp = styled.p`
-    font-size: 50px;
-    font-weight: 500;
-`;
+const MainContainer = styled.div``;
+
+const HeaderContainer = styled.div``;
+
+const SearchContainer = styled.div``;
+
+const CategoryContainer = styled.div``;
+
+const ContentsContainer = styled.div``;
+
+const ContentsHeader = styled.div``;
+
+const Contents = styled.div``;
+
+const LogoutBtn = styled.button``;
 
 function MainPage() {
     const [authInfo, setAuthInfo] = useRecoilState(authState);
@@ -31,6 +42,7 @@ function MainPage() {
                 // 사용자가 로그인된 상태라면 메인 페이지로 리디렉션
                 navigate("/");
             }
+            console.log(authInfo);
         } else {
             console.log("Kakao 객체가 초기화되지 않았습니다.");
             navigate("/");
@@ -65,9 +77,11 @@ function MainPage() {
 
     return (
         <TopContainer>
-            <Temp>환영합니다 {authInfo?.user?.name}님.</Temp>
-            <button onClick={handleLogout}>로그아웃</button>
-            <button onClick={currentState}>현재 로그인 상태</button>
+            <MainContainer>
+                <HeaderContainer>
+                    <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
+                </HeaderContainer>
+            </MainContainer>
         </TopContainer>
     );
 }
