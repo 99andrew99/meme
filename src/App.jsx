@@ -1,5 +1,13 @@
+import React from "react";
+import GlobalStyles from "./GlobalStyles";
+
 function App() {
-    return <div>test</div>;
+    return (
+        <>
+            <GlobalStyles />
+            <div>초기 세팅</div>
+        </>
+    );
 }
 
 export default App;
