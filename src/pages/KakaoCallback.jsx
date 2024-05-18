@@ -2,6 +2,20 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { authState } from "../atoms/authState";
 import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
+
+const TopContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+const LoadingText = styled.p`
+    font-size: 20px;
+`;
 
 const KakaoCallback = () => {
     const location = useLocation(); // 현재 위치 정보를 얻기 위한 훅
@@ -80,9 +94,9 @@ const KakaoCallback = () => {
     }, [location, navigate]); // location과 navigate 변경될 때마다 이 효과를 실행
 
     return (
-        <div>
-            <p>로그인중입니다...</p>
-        </div>
+        <TopContainer>
+            <LoadingText>로그인중입니다...</LoadingText>
+        </TopContainer>
     );
 };
 

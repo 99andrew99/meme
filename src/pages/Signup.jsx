@@ -9,15 +9,51 @@ const TopContainer = styled.div`
     height: 100vh;
     background-color: black;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: white;
 `;
 
+const ContentsContainer = styled.div`
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const WelcomeText = styled.p`
+    text-align: center;
+    font-size: 50px;
+    margin: 20px;
+    font-weight: 500;
+`;
+const InfoText = styled.p`
+    text-align: center;
+    font-size: 20px;
+`;
+
+const TitleContainer = styled.div``;
+
+const MemeContainer = styled.div``;
+
+const MemeText = styled.p`
+    text-align: center;
+`;
+
+const TeamNameContainer = styled.div``;
+
+const TeamName = styled.p``;
+
 const LoginBtn = styled.img`
+    margin-top: 10px;
     &:hover {
         cursor: pointer;
     }
 `;
+
 function Signup() {
     const { user } = useRecoilValue(authState);
     const navigate = useNavigate();
@@ -38,10 +74,24 @@ function Signup() {
 
     return (
         <TopContainer>
+            <ContentsContainer>
+                <TitleContainer>
+                    <WelcomeText>만나서 반가워요!</WelcomeText>
+                    <InfoText>서비스를 소개하는 문구입니다.</InfoText>
+                </TitleContainer>
+                <MemeContainer>
+                    <MemeText>
+                        여기 텍스트 밈 한줄 랜덤으로 띄워주고싶어요!
+                    </MemeText>
+                </MemeContainer>
+            </ContentsContainer>
             <LoginBtn
                 src="imgs/kakao_login_medium_wide.png"
                 onClick={handleOnclickLogin}
             />
+            <TeamNameContainer>
+                <TeamName>405TEN001</TeamName>
+            </TeamNameContainer>
         </TopContainer>
     );
 }

@@ -15,16 +15,27 @@ const TopContainer = styled.div`
     background-color: black;
 `;
 
+const Temp = styled.p`
+    font-size: 50px;
+    font-weight: 500;
+`;
+
 function MainPage() {
     const [authInfo, setAuthInfo] = useRecoilState(authState);
-    const { user } = useRecoilValue(authState);
-
-    useEffect(() => {
-        console.log(authInfo);
-        console.log(user);
-    }, []);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (window.Kakao && window.Kakao.Auth) {
+            if (!authInfo?.token && !window.Kakao.Auth.getAccessToken()) {
+                // 사용자가 로그인된 상태라면 메인 페이지로 리디렉션
+                navigate("/");
+            }
+        } else {
+            console.log("Kakao 객체가 초기화되지 않았습니다.");
+            navigate("/");
+        }
+    }, [authInfo, navigate]);
 
     const handleLogout = () => {
         console.log("들어옴");
@@ -54,7 +65,7 @@ function MainPage() {
 
     return (
         <TopContainer>
-            <div>환영합니다 {authInfo?.user?.name}님.</div>
+            <Temp>환영합니다 {authInfo?.user?.name}님.</Temp>
             <button onClick={handleLogout}>로그아웃</button>
             <button onClick={currentState}>현재 로그인 상태</button>
         </TopContainer>
