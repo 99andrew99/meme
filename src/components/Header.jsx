@@ -45,7 +45,9 @@ const SearchContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-    width: 90%;
+    width: calc(100% - 20px);
+    /* margin-left: 10px; */
+    box-sizing: border-box;
     height: 4vh;
     border-radius: 10px;
     color: black;
