@@ -3,6 +3,10 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { authState } from "../atoms/authState";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
+// 컴포넌트 임포트
+import Header from "../components/Header";
+
 const TopContainer = styled.div`
     width: 100vw;
     height: 100vh;
@@ -15,13 +19,34 @@ const TopContainer = styled.div`
     background-color: black;
 `;
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+    width: 30vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
 
-const HeaderContainer = styled.div``;
+    @media (max-width: 480px) {
+        width: 100vw;
+    }
+`;
 
-const SearchContainer = styled.div``;
+const CategoryContainer = styled.div`
+    /* 마진 탑 임시 */
+    margin-top: 50px;
 
-const CategoryContainer = styled.div``;
+    width: 100%;
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+    box-sizing: border-box;
+    cursor: grab;
+`;
 
 const ContentsContainer = styled.div``;
 
@@ -30,6 +55,14 @@ const ContentsHeader = styled.div``;
 const Contents = styled.div``;
 
 const LogoutBtn = styled.button``;
+
+const Temp = styled.div`
+    width: 300px;
+    height: 10vh;
+    background-color: blue;
+    margin: 5px;
+    flex-shrink: 0;
+`;
 
 function MainPage() {
     const [authInfo, setAuthInfo] = useRecoilState(authState);
@@ -78,9 +111,29 @@ function MainPage() {
     return (
         <TopContainer>
             <MainContainer>
-                <HeaderContainer>
-                    <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
-                </HeaderContainer>
+                <Header />
+
+                <CategoryContainer>
+                    {/* 여기 가로 스크롤 */}
+                    <Temp>asd</Temp>
+                    <Temp>asd1</Temp>
+                    <Temp>asd2</Temp>
+                    <Temp>asd4</Temp>
+                    <Temp>asd5</Temp>
+                    <Temp>asd6</Temp>
+                    <Temp>asd7</Temp>
+                </CategoryContainer>
+
+                <ContentsContainer>
+                    <ContentsHeader>
+                        {/* 총 짤의 개수 */}
+
+                        {/* 필터링 */}
+                    </ContentsHeader>
+
+                    <Contents>{/* 여기 무한 스크롤 세로 */}</Contents>
+                </ContentsContainer>
+                <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
             </MainContainer>
         </TopContainer>
     );
