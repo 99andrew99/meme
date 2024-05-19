@@ -30,7 +30,8 @@ function App() {
     }, []);
 
     return (
-        <BrowserRouter basename={basename}>
+        // <BrowserRouter basename={basename}>
+        <BrowserRouter>
             <GlobalStyles />
             <Routes>
                 <Route path="/" element={<Signup />} />
