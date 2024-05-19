@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 // 컴포넌트 임포트
 import Header from "../components/Header";
+import Categories from "../components/Categories";
 
 const TopContainer = styled.div`
     width: 100vw;
@@ -31,23 +32,6 @@ const MainContainer = styled.div`
     }
 `;
 
-const CategoryContainer = styled.div`
-    /* 마진 탑 임시 */
-    margin-top: 50px;
-
-    width: 100%;
-    display: flex;
-    white-space: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-    }
-    box-sizing: border-box;
-    cursor: grab;
-`;
-
 const ContentsContainer = styled.div``;
 
 const ContentsHeader = styled.div``;
@@ -55,14 +39,6 @@ const ContentsHeader = styled.div``;
 const Contents = styled.div``;
 
 const LogoutBtn = styled.button``;
-
-const Temp = styled.div`
-    width: 300px;
-    height: 10vh;
-    background-color: blue;
-    margin: 5px;
-    flex-shrink: 0;
-`;
 
 function MainPage() {
     const [authInfo, setAuthInfo] = useRecoilState(authState);
@@ -112,17 +88,7 @@ function MainPage() {
         <TopContainer>
             <MainContainer>
                 <Header />
-
-                <CategoryContainer>
-                    {/* 여기 가로 스크롤 */}
-                    <Temp>asd</Temp>
-                    <Temp>asd1</Temp>
-                    <Temp>asd2</Temp>
-                    <Temp>asd4</Temp>
-                    <Temp>asd5</Temp>
-                    <Temp>asd6</Temp>
-                    <Temp>asd7</Temp>
-                </CategoryContainer>
+                <Categories />
 
                 <ContentsContainer>
                     <ContentsHeader>
