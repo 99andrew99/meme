@@ -21,7 +21,9 @@ const CategoryContainer = styled.div`
 const Category = styled.div`
     width: 100px;
     height: 4vh;
-    background-color: black;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
     border-radius: 20px;
     margin: 5px;
     flex-shrink: 0;
@@ -30,7 +32,8 @@ const Category = styled.div`
     justify-content: center;
 
     &:hover {
-        background-color: rgb(0, 0, 0, 0.7);
+        background-color: black;
+        color: white;
     }
 `;
 
