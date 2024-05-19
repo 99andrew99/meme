@@ -11,7 +11,7 @@ import MainPage from "./pages/MainPage";
 import KakaoCallback from "./pages/KakaoCallback";
 
 function App() {
-    const basename = import.meta.env.VITE_BASE || "/";
+    // const basename = import.meta.env.VITE_BASE || "/";
     const setAuthInfo = useSetRecoilState(authState);
 
     useEffect(() => {
