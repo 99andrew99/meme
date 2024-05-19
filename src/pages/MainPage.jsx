@@ -3,6 +3,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { authState } from "../atoms/authState";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
+// 컴포넌트 임포트
+import Header from "../components/Header";
+import Categories from "../components/Categories";
+
 const TopContainer = styled.div`
     width: 100vw;
     height: 100vh;
@@ -15,10 +20,25 @@ const TopContainer = styled.div`
     background-color: black;
 `;
 
-const Temp = styled.p`
-    font-size: 50px;
-    font-weight: 500;
+const MainContainer = styled.div`
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+
+    @media (max-width: 480px) {
+        width: 100vw;
+    }
 `;
+
+const ContentsContainer = styled.div``;
+
+const ContentsHeader = styled.div``;
+
+const Contents = styled.div``;
+
+const LogoutBtn = styled.button``;
 
 function MainPage() {
     const [authInfo, setAuthInfo] = useRecoilState(authState);
@@ -31,6 +51,7 @@ function MainPage() {
                 // 사용자가 로그인된 상태라면 메인 페이지로 리디렉션
                 navigate("/");
             }
+            console.log(authInfo);
         } else {
             console.log("Kakao 객체가 초기화되지 않았습니다.");
             navigate("/");
@@ -65,9 +86,21 @@ function MainPage() {
 
     return (
         <TopContainer>
-            <Temp>환영합니다 {authInfo?.user?.name}님.</Temp>
-            <button onClick={handleLogout}>로그아웃</button>
-            <button onClick={currentState}>현재 로그인 상태</button>
+            <MainContainer>
+                <Header />
+                <Categories />
+
+                <ContentsContainer>
+                    <ContentsHeader>
+                        {/* 총 짤의 개수 */}
+
+                        {/* 필터링 */}
+                    </ContentsHeader>
+
+                    <Contents>{/* 여기 무한 스크롤 세로 */}</Contents>
+                </ContentsContainer>
+                <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
+            </MainContainer>
         </TopContainer>
     );
 }
