@@ -21,7 +21,7 @@ const TopContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-    width: 30vw;
+    width: 50vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
