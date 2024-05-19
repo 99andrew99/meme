@@ -11,6 +11,7 @@ import MainPage from "./pages/MainPage";
 import KakaoCallback from "./pages/KakaoCallback";
 
 function App() {
+    const basename = import.meta.env.VITE_BASE || "/";
     const setAuthInfo = useSetRecoilState(authState);
 
     useEffect(() => {
@@ -29,7 +30,7 @@ function App() {
     }, []);
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
             <GlobalStyles />
             <Routes>
                 <Route path="/" element={<Signup />} />
