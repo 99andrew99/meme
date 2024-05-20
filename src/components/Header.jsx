@@ -1,22 +1,32 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState, useEffect, useRef } from "react";
+import styled, { keyframes } from "styled-components";
+
+const slideDown = keyframes`
+    from {
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+`;
 
 const HeaderContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 12vh;
-    /* background-color: tomato; */
+    position: relative;
 `;
 
-const MenuContaienr = styled.div`
+const MenuContainer = styled.div`
     display: flex;
     width: 100%;
     height: 5vh;
     justify-content: space-between;
     border-bottom: 1px solid #d4d4d4;
     align-items: center;
-    /* background-color: aqua; */
 `;
 
 const Title = styled.div`
@@ -46,7 +56,6 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
     width: calc(100% - 20px);
-    /* margin-left: 10px; */
     box-sizing: border-box;
     height: 4vh;
     border-radius: 10px;
@@ -74,7 +83,6 @@ const SearchHistory = styled.div`
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
     z-index: 1;
     padding: 10px;
-
     display: flex;
     flex-direction: column;
     color: black;
@@ -94,6 +102,7 @@ const SearchHistoryDel = styled.div`
 `;
 
 const SearchHistoryTexts = styled.div``;
+
 const SearchHistoryText = styled.div`
     cursor: pointer;
     margin-top: 10px;
@@ -103,8 +112,81 @@ const SearchHistoryText = styled.div`
     }
 `;
 
+const HamburgerContainer = styled.div`
+    width: 100%;
+    height: 50vh;
+    background-color: #272727;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-left: 50px;
+    padding-right: 50px;
+    animation: ${slideDown} 0.5s ease-out; /* 애니메이션 적용 */
+`;
+
+const HamLogoContainer = styled.div`
+    display: flex;
+    align-items: center;
+    height: 50px;
+`;
+
+const HamServiceName = styled.div`
+    margin-left: 10px;
+    font-weight: 600;
+`;
+
+const HamInfoText = styled.div`
+    height: 50px;
+    display: flex;
+    align-items: center;
+`;
+
+const HamCategoryContainer = styled.div``;
+
+const HamCatergory = styled.div`
+    height: 55px;
+    display: flex;
+    align-items: center;
+    margin: 2px;
+    border-bottom: 1px solid #3a3a3b;
+    font-size: 14px;
+    padding-left: 30px;
+
+    &:hover {
+        background-color: #3a3a3b;
+        cursor: pointer;
+    }
+`;
+
+const HamCloseIconContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+`;
+
+const HamCloseIcon = styled.img`
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+`;
+
 function Header() {
     const [isFocus, setIsFocus] = useState(false);
+    const [isHam, setIsHam] = useState(false);
+    const hamContainerRef = useRef(null);
+
+    const handleOpenHam = () => {
+        setIsHam(true);
+    };
+
+    const handleCloseHam = () => {
+        setIsHam(false);
+    };
 
     const handleFocus = () => {
         setIsFocus(true);
@@ -114,12 +196,28 @@ function Header() {
         setIsFocus(false);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                hamContainerRef.current &&
+                !hamContainerRef.current.contains(event.target)
+            ) {
+                handleCloseHam();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [hamContainerRef]);
+
     return (
         <HeaderContainer>
-            <MenuContaienr>
-                <Title>밈모아</Title>
-                <HamburgerIcon src="imgs/burger.svg" />
-            </MenuContaienr>
+            <MenuContainer>
+                <Title>mememoa</Title>
+                <HamburgerIcon src="imgs/burger.svg" onClick={handleOpenHam} />
+            </MenuContainer>
 
             <SearchContainer>
                 <SearchInput
@@ -135,13 +233,55 @@ function Header() {
                             <SearchHistoryDel>전체삭제</SearchHistoryDel>
                         </SearchHistoryHeader>
                         <SearchHistoryTexts>
-                            <SearchHistoryText>꽁꽁 얼어붙은</SearchHistoryText>
+                            <SearchHistoryText
+                                onMouseDown={() => {
+                                    console.log("꽁꽁");
+                                }}
+                            >
+                                꽁꽁 얼어붙은
+                            </SearchHistoryText>
                             <SearchHistoryText>야레야레</SearchHistoryText>
-                            <SearchHistoryText>아이~ 씨x</SearchHistoryText>
+                            <SearchHistoryText>
+                                아이~ 씨x 시민을 위해서 어쩌구
+                            </SearchHistoryText>
                         </SearchHistoryTexts>
                     </SearchHistory>
                 )}
             </SearchContainer>
+            {isHam && (
+                <HamburgerContainer ref={hamContainerRef}>
+                    <HamLogoContainer>
+                        <img src={"imgs/tempLogo.png"} />
+                        <HamServiceName>mememoa</HamServiceName>
+                    </HamLogoContainer>
+                    <HamInfoText>
+                        짤(다른 유형의 밈들도 추가 예정입니다!)
+                    </HamInfoText>
+                    <HamCategoryContainer>
+                        <HamCatergory onClick={handleCloseHam}>
+                            카테고리
+                        </HamCatergory>
+                        <HamCatergory onClick={handleCloseHam}>
+                            카테고리
+                        </HamCatergory>
+                        <HamCatergory onClick={handleCloseHam}>
+                            카테고리
+                        </HamCatergory>
+                        <HamCatergory onClick={handleCloseHam}>
+                            카테고리
+                        </HamCatergory>
+                        <HamCatergory onClick={handleCloseHam}>
+                            카테고리
+                        </HamCatergory>
+                    </HamCategoryContainer>
+                    <HamCloseIconContainer>
+                        <HamCloseIcon
+                            src={"imgs/caretUp.png"}
+                            onClick={handleCloseHam}
+                        />
+                    </HamCloseIconContainer>
+                </HamburgerContainer>
+            )}
         </HeaderContainer>
     );
 }

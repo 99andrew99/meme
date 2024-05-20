@@ -42,7 +42,7 @@ const KakaoCallback = () => {
                 .then((data) => {
                     const { access_token } = data;
 
-                    // console.log("데이터: ", data);
+                    console.log("데이터 WLs: ", data);
 
                     // Kakao SDK에 액세스 토큰 설정
                     if (window.Kakao) {

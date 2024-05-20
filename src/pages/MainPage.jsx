@@ -22,8 +22,8 @@ const TopContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-    width: 50vw;
-    height: 100vh;
+    width: 480px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -84,9 +84,8 @@ function MainPage() {
             <MainContainer>
                 <Header />
                 {/* <Categories /> */}
-
-                <Contents />
                 {/* <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn> */}
+                <Contents />
             </MainContainer>
         </TopContainer>
     );
