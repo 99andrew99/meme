@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Header from "../components/Header";
 import Categories from "../components/Categories";
 import Contents from "../components/Contents";
+import FloatingBtn from "../components/FloatingBtn";
 
 const TopContainer = styled.div`
     width: 100vw;
@@ -27,7 +28,7 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     background-color: white;
-
+    position: relative;
     @media (max-width: 480px) {
         width: 100vw;
     }
@@ -86,6 +87,8 @@ function MainPage() {
                 {/* <Categories /> */}
                 {/* <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn> */}
                 <Contents />
+
+                <FloatingBtn />
             </MainContainer>
         </TopContainer>
     );

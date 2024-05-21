@@ -16,7 +16,7 @@ const TopContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-    width: 480px;
+    width: 470px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -24,6 +24,10 @@ const MainContainer = styled.div`
     justify-content: center;
     /* background-color: tomato; */
     background: linear-gradient(180deg, #69aeff 0%, #345780 59%, #000000 78%);
+
+    @media (max-width: 470px) {
+        width: 100vw;
+    }
 `;
 
 const ContentsContainer = styled.div`
@@ -44,22 +48,47 @@ const WelcomeText = styled.p`
     font-size: 50px;
     margin: 20px;
     font-weight: 600;
+
+    @media (max-width: 470px) {
+        font-size: 40px;
+    }
 `;
 const InfoText = styled.p`
     text-align: center;
     font-size: 20px;
     font-weight: 600;
+
+    @media (max-width: 470px) {
+        font-size: 15px;
+    }
 `;
 
-const ImgContainer = styled.div``;
+const ImgContainer = styled.div`
+    width: 470px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 470px) {
+        width: 100vw;
+        height: 350px;
+    }
+`;
 
 const ImgInfoText = styled.div`
     text-align: center;
     margin-bottom: 30px;
+
+    @media (max-width: 470px) {
+        font-size: 15px;
+    }
 `;
 
 const Img = styled.img`
     width: 100%;
+
+    @media (max-width: 470px) {
+        width: 80vw;
+    }
 `;
 
 const TitleContainer = styled.div`
