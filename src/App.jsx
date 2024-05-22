@@ -7,10 +7,12 @@ import { authState } from "./atoms/authState";
 //페이지 임포트
 import Signup from "./pages/Signup";
 import MainPage from "./pages/MainPage";
+import CreateContentPage from "./pages/CreateContentPage";
 //로그인
 import KakaoCallback from "./pages/KakaoCallback";
 
 function App() {
+    // const basename = import.meta.env.VITE_BASE || "/";
     const setAuthInfo = useSetRecoilState(authState);
 
     useEffect(() => {
@@ -29,11 +31,13 @@ function App() {
     }, []);
 
     return (
+        // <BrowserRouter basename={basename}>
         <BrowserRouter>
             <GlobalStyles />
             <Routes>
                 <Route path="/" element={<Signup />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path="/create" element={<CreateContentPage />} />
                 <Route
                     path="/oauth/callback/kakao"
                     element={<KakaoCallback />}

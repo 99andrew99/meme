@@ -7,6 +7,8 @@ import { useEffect } from "react";
 // 컴포넌트 임포트
 import Header from "../components/Header";
 import Categories from "../components/Categories";
+import Contents from "../components/Contents";
+import FloatingBtn from "../components/FloatingBtn";
 
 const TopContainer = styled.div`
     width: 100vw;
@@ -21,22 +23,16 @@ const TopContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-    width: 50vw;
-    height: 100vh;
+    width: 480px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: white;
-
+    position: relative;
     @media (max-width: 480px) {
         width: 100vw;
     }
 `;
-
-const ContentsContainer = styled.div``;
-
-const ContentsHeader = styled.div``;
-
-const Contents = styled.div``;
 
 const LogoutBtn = styled.button``;
 
@@ -88,18 +84,11 @@ function MainPage() {
         <TopContainer>
             <MainContainer>
                 <Header />
-                <Categories />
+                {/* <Categories /> */}
+                {/* <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn> */}
+                <Contents />
 
-                <ContentsContainer>
-                    <ContentsHeader>
-                        {/* 총 짤의 개수 */}
-
-                        {/* 필터링 */}
-                    </ContentsHeader>
-
-                    <Contents>{/* 여기 무한 스크롤 세로 */}</Contents>
-                </ContentsContainer>
-                <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
+                <FloatingBtn />
             </MainContainer>
         </TopContainer>
     );

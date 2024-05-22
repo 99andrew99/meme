@@ -15,31 +15,85 @@ const TopContainer = styled.div`
     color: white;
 `;
 
+const MainContainer = styled.div`
+    width: 470px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: tomato; */
+    background: linear-gradient(180deg, #69aeff 0%, #345780 59%, #000000 78%);
+
+    @media (max-width: 470px) {
+        width: 100vw;
+    }
+`;
+
 const ContentsContainer = styled.div`
-    width: 50vw;
-    height: 50vh;
+    width: 100%;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
-    @media (max-width: 480px) {
+    /* background-color: blue; */
+    /* @media (max-width: 480px) {
         width: 100vw;
-    }
+    } */
 `;
 
 const WelcomeText = styled.p`
     text-align: center;
     font-size: 50px;
     margin: 20px;
-    font-weight: 500;
+    font-weight: 600;
+
+    @media (max-width: 470px) {
+        font-size: 40px;
+    }
 `;
 const InfoText = styled.p`
     text-align: center;
     font-size: 20px;
+    font-weight: 600;
+
+    @media (max-width: 470px) {
+        font-size: 15px;
+    }
 `;
 
-const TitleContainer = styled.div``;
+const ImgContainer = styled.div`
+    width: 470px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 470px) {
+        width: 100vw;
+        height: 350px;
+    }
+`;
+
+const ImgInfoText = styled.div`
+    text-align: center;
+    margin-bottom: 30px;
+
+    @media (max-width: 470px) {
+        font-size: 15px;
+    }
+`;
+
+const Img = styled.img`
+    width: 100%;
+
+    @media (max-width: 470px) {
+        width: 80vw;
+    }
+`;
+
+const TitleContainer = styled.div`
+    color: black;
+`;
 
 const MemeContainer = styled.div``;
 
@@ -65,10 +119,6 @@ const MemeText = styled.p`
     text-align: center;
     animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 1.5s ease-in-out;
 `;
-
-const TeamNameContainer = styled.div``;
-
-const TeamName = styled.p``;
 
 const LoginBtn = styled.img`
     margin-top: 10px;
@@ -122,24 +172,29 @@ function Signup() {
 
     return (
         <TopContainer>
-            <ContentsContainer>
-                <TitleContainer>
-                    <WelcomeText>만나서 반가워요!</WelcomeText>
-                    <InfoText>서비스를 소개하는 문구입니다.</InfoText>
-                </TitleContainer>
-                <MemeContainer>
-                    <MemeText visible={visible}>
-                        {memeTexts[currentMemeIndex]}
-                    </MemeText>
-                </MemeContainer>
-            </ContentsContainer>
-            <LoginBtn
-                src="imgs/kakao_login_medium_wide.png"
-                onClick={handleOnclickLogin}
-            />
-            <TeamNameContainer>
-                <TeamName>405TEN001</TeamName>
-            </TeamNameContainer>
+            <MainContainer>
+                <ContentsContainer>
+                    <TitleContainer>
+                        <WelcomeText>만나서 반가워요!</WelcomeText>
+                        <InfoText>밈 아카이빙 서비스 밈모아입니다.</InfoText>
+                    </TitleContainer>
+
+                    <ImgContainer>
+                        <ImgInfoText>최신 밈을 찾고 공유해 보세요!</ImgInfoText>
+                        <Img src={"imgs/login_onboarding.png"} />
+                    </ImgContainer>
+
+                    <MemeContainer>
+                        <MemeText visible={visible}>
+                            {memeTexts[currentMemeIndex]}
+                        </MemeText>
+                    </MemeContainer>
+                </ContentsContainer>
+                <LoginBtn
+                    src="imgs/kakao_login_medium_wide.png"
+                    onClick={handleOnclickLogin}
+                />
+            </MainContainer>
         </TopContainer>
     );
 }
