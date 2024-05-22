@@ -13,6 +13,7 @@ const TopContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 4px 4px black;
 `;
 
 const Img = styled.img`
