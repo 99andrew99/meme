@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const TopContainer = styled.div`
@@ -20,8 +21,15 @@ const Img = styled.img`
 `;
 
 function FloatingBtn() {
+    const navigate = useNavigate();
+    //등록 버튼 눌렀을때 등록 페이지로 전환
+    const moveToCreate = () => {
+        console.log("movemove");
+        navigate("/create");
+    };
+
     return (
-        <TopContainer>
+        <TopContainer onClick={moveToCreate}>
             <Img src="imgs/add-24px.svg" />
         </TopContainer>
     );

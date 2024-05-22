@@ -7,6 +7,7 @@ import { authState } from "./atoms/authState";
 //페이지 임포트
 import Signup from "./pages/Signup";
 import MainPage from "./pages/MainPage";
+import CreateContentPage from "./pages/CreateContentPage";
 //로그인
 import KakaoCallback from "./pages/KakaoCallback";
 
@@ -36,6 +37,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Signup />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path="/create" element={<CreateContentPage />} />
                 <Route
                     path="/oauth/callback/kakao"
                     element={<KakaoCallback />}

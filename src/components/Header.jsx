@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import styled, { keyframes } from "styled-components";
+import { useNavigate } from "react-router-dom";
+import styled, { keyframes, css } from "styled-components";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { authState } from "../atoms/authState";
 
 const slideDown = keyframes`
     from {
@@ -10,6 +13,16 @@ const slideDown = keyframes`
         transform: translateY(0);
         opacity: 1;
     }
+`;
+
+const slideUp = keyframes`
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+
 `;
 
 const HeaderContainer = styled.div`
@@ -124,7 +137,14 @@ const HamburgerContainer = styled.div`
     box-sizing: border-box;
     padding-left: 50px;
     padding-right: 50px;
-    animation: ${slideDown} 0.5s ease-out; /* 애니메이션 적용 */
+    animation: ${({ isclosing }) =>
+        isclosing
+            ? css`
+                  ${slideUp} 0.5s ease-out
+              `
+            : css`
+                  ${slideDown} 0.5s ease-out
+              `};
 `;
 
 const HamLogoContainer = styled.div`
@@ -178,14 +198,22 @@ const HamCloseIcon = styled.img`
 function Header() {
     const [isFocus, setIsFocus] = useState(false);
     const [isHam, setIsHam] = useState(false);
+    const [isclosing, setIsclosing] = useState(false);
     const hamContainerRef = useRef(null);
+    const [authInfo, setAuthInfo] = useRecoilState(authState);
+    const navigate = useNavigate();
 
     const handleOpenHam = () => {
         setIsHam(true);
     };
 
     const handleCloseHam = () => {
-        setIsHam(false);
+        setIsclosing(true);
+
+        setTimeout(() => {
+            setIsHam(false);
+            setIsclosing(false);
+        }, [500]);
     };
 
     const handleFocus = () => {
@@ -211,6 +239,18 @@ function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [hamContainerRef]);
+
+    const handleLogout = () => {
+        console.log("들어옴");
+        if (window.Kakao.Auth.getAccessToken()) {
+            window.Kakao.Auth.logout(() => {
+                setAuthInfo({ token: null, user: null });
+                localStorage.removeItem("authInfo");
+                alert("로그아웃 완료");
+                navigate("/");
+            });
+        }
+    };
 
     return (
         <HeaderContainer>
@@ -249,10 +289,23 @@ function Header() {
                 )}
             </SearchContainer>
             {isHam && (
-                <HamburgerContainer ref={hamContainerRef}>
+                <HamburgerContainer
+                    ref={hamContainerRef}
+                    isclosing={isclosing ? 1 : 0}
+                >
                     <HamLogoContainer>
                         <img src={"imgs/tempLogo.png"} />
                         <HamServiceName>mememoa</HamServiceName>
+                        <img
+                            src="imgs/logout.svg"
+                            style={{
+                                width: "24px",
+                                height: "24px",
+                                marginLeft: "10px",
+                                cursor: "pointer",
+                            }}
+                            onClick={handleLogout}
+                        />
                     </HamLogoContainer>
                     <HamInfoText>
                         짤(다른 유형의 밈들도 추가 예정입니다!)
