@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const TopContainer = styled.div`
@@ -8,6 +9,7 @@ const TopContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     border-radius: 10px;
+    cursor: pointer;
 `;
 
 const TagContainer = styled.div`
@@ -31,8 +33,14 @@ const Tag = styled.div`
 `;
 
 function Content({ num }) {
+    const navigate = useNavigate();
+
+    const moveDetail = () => {
+        navigate(`/detail/${num}`);
+    };
+
     return (
-        <TopContainer>
+        <TopContainer onClick={moveDetail}>
             {num}
             <TagContainer>
                 <Tag>#태그 1</Tag>
