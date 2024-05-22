@@ -83,7 +83,7 @@ function MainPage() {
     return (
         <TopContainer>
             <MainContainer>
-                <Header />
+                <Header isOther={false} />
                 {/* <Categories /> */}
                 {/* <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn> */}
                 <Contents />

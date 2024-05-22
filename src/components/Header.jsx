@@ -68,12 +68,13 @@ const SearchContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-    width: calc(100% - 20px);
+    /* width: calc(100% - 20px); */
+    width: 100%;
     box-sizing: border-box;
     height: 4vh;
     border-radius: 10px;
     color: black;
-    font-size: 20px;
+    font-size: 1.1rem;
     font-weight: 500;
     background-color: #e3e3e3;
     border: none;
@@ -195,7 +196,25 @@ const HamCloseIcon = styled.img`
     cursor: pointer;
 `;
 
-function Header() {
+const BackIcon = styled.img`
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+`;
+
+const IconInputContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+`;
+
+// 메인 페이지라면 뒤로가기 버튼 표시하지 않음.
+// 다른 페이지라면 뒤로가기 버튼 표시.
+function Header({ isOther }) {
     const [isFocus, setIsFocus] = useState(false);
     const [isHam, setIsHam] = useState(false);
     const [isclosing, setIsclosing] = useState(false);
@@ -252,6 +271,10 @@ function Header() {
         }
     };
 
+    const moveBack = () => {
+        navigate(-1);
+    };
+
     return (
         <HeaderContainer>
             <MenuContainer>
@@ -260,12 +283,21 @@ function Header() {
             </MenuContainer>
 
             <SearchContainer>
-                <SearchInput
-                    type="text"
-                    placeholder='  "무도 유니버스" 검색해보는 건 어때요?'
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                />
+                <IconInputContainer>
+                    {isOther && (
+                        <BackIcon
+                            src="imgs/Expand_left.svg"
+                            onClick={moveBack}
+                        />
+                    )}
+                    <SearchInput
+                        type="text"
+                        placeholder='  "무도 유니버스" 검색해보는 건 어때요?'
+                        onFocus={handleFocus}
+                        onBlur={handleBlur}
+                    />
+                </IconInputContainer>
+
                 {isFocus && (
                     <SearchHistory>
                         <SearchHistoryHeader>
