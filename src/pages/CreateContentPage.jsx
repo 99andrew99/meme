@@ -12,6 +12,10 @@ const TopContainer = styled.div`
     justify-content: center;
     size: 30px;
     background-color: black;
+
+    @media (min-height: 900px) {
+        height: 100vh;
+    }
 `;
 
 const MainContainer = styled.div`
@@ -23,8 +27,8 @@ const MainContainer = styled.div`
     position: relative;
     /* overflow-y: scroll; */
     box-sizing: border-box;
-    padding-left: 20px;
-    padding-right: 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
 
     @media (max-width: 480px) {
         width: 100vw;
@@ -33,29 +37,38 @@ const MainContainer = styled.div`
 
 const HeaderContainer = styled.div`
     width: 100%;
-    height: 7vh;
-    /* background-color: blue; */
+    height: 5vh;
+    background-color: #f5f5f5;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    position: relative;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    box-sizing: border-box;
 `;
 
 const CloseIcon = styled.img`
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
-
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
     @media (max-width: 480px) {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
     }
 `;
 
 const PageTitle = styled.span`
-    font-size: 1.4rem;
-
+    font-size: 1.1rem;
+    color: #434343;
+    margin-left: auto;
+    margin-right: auto;
     @media (max-width: 480px) {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 `;
 
@@ -77,6 +90,9 @@ const MemeTitle = styled.input`
     border-bottom: 1px solid #e3e3e3;
     font-size: 1.4rem;
     font-weight: 500;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
     &::placeholder {
         color: #acacac;
     }
@@ -84,12 +100,22 @@ const MemeTitle = styled.input`
 
 const UploadContainer = styled.div`
     width: 100%;
-    height: ${(props) => (props.hasFile ? "55vh" : "40vh")};
+    /* height: ${(props) => (props.hasFile ? "55vh" : "40vh")}; */
+    border-bottom: 1px solid #e3e3e3;
     display: flex;
     flex-direction: column;
     /* background-color: tomato; */
     justify-content: space-between;
-    margin-top: 10px;
+    /* padding-top: 20px; */
+    box-sizing: border-box;
+    /* padding-left: 100px;
+    padding-right: 100px; */
+    /* padding-bottom: 20px; */
+
+    @media (max-width: 470px) {
+        /* padding-left: 75px;
+        padding-right: 75px; */
+    }
 `;
 
 const UploadTitle = styled.span`
@@ -99,15 +125,16 @@ const UploadTitle = styled.span`
 `;
 
 const UploadFileContainer = styled.div`
-    height: 7vh;
     background-color: #eeeeee;
     border-radius: 10px;
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     padding: 15px;
+    height: 20vh;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 `;
 
 const UploadFileText = styled.span`
@@ -122,14 +149,14 @@ const UploadFileIcon = styled.img`
 `;
 
 const UploadText = styled.textarea`
-    height: 25vh;
-    font-size: 1rem;
+    height: 6vh;
+    font-size: 0.9rem;
     font-weight: 400;
     background-color: #eeeeee;
     box-sizing: border-box;
     padding: 15px;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     &::placeholder {
         color: #7f7f7f;
     }
@@ -137,14 +164,16 @@ const UploadText = styled.textarea`
 
 const UploadedImageContainer = styled.div`
     position: relative;
-    margin-top: 10px;
-    width: 150px;
-    height: 150px;
-    border: 1px solid black;
+    /* margin-top: 10px; */
+    box-sizing: border-box;
+    /* padding: 15px; */
+    height: 20vh;
+
     img {
-        width: 150px;
-        height: 150px;
-        border-radius: 10px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        /* border-radius: 10px; */
     }
 `;
 
@@ -170,9 +199,19 @@ const DeleteButton = styled.button`
 const CategoryContainer = styled.div`
     display: flex;
     flex-direction: column;
-    height: 17vh;
-    justify-content: space-between;
-    margin-top: 20px;
+    height: 20vh;
+    justify-content: space-around;
+    /* margin-top: 20px; */
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 12px solid #e3e3e3;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    @media (max-height: 700px) {
+        height: 25vh;
+    }
 `;
 
 const CategoryTitle = styled(UploadTitle)``;
@@ -191,16 +230,19 @@ const Category = styled.div`
     justify-content: center;
     font-size: 0.9rem;
     cursor: pointer;
-    background-color: ${(props) => (props.isSelected ? "black" : "#eeeeee")};
-    color: ${(props) => (props.isSelected ? "#eeeeee" : "black")};
+    background-color: ${(props) => (props.isSelected ? "#2e90ff" : "#eeeeee")};
+    color: ${(props) => (props.isSelected ? "#eeeeee" : "#555555")};
 `;
 
 const TagContainer = styled.div`
     display: flex;
     flex-direction: column;
-    height: 40vh;
+    /* height: 30vh; */
     /* background-color: tomato; */
     margin-top: 20px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
 `;
 
 const TagTitleContainer = styled.div`
@@ -235,7 +277,7 @@ const TagInput = styled.input`
     background-color: transparent;
     width: 80%;
     height: 3vh;
-    font-size: 1.1rem;
+    font-size: 1rem;
     border: none;
     &::placeholder {
         color: #7f7f7f;
@@ -269,6 +311,52 @@ const TagDelIcon = styled.img`
     margin-left: 10px;
     cursor: pointer;
 `;
+
+const UploadFileIcon2 = styled.img``;
+
+const MemeInfoContainer = styled.div`
+    height: 15vh;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-bottom: 12px solid #e3e3e3;
+    padding-top: 10px;
+    padding-bottom: 10px;
+`;
+
+const MemeInfoText = styled(UploadTitle)``;
+
+const SubmitContainer = styled.div`
+    height: 12.5 vh;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+`;
+
+const SubmitBtn = styled.div`
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #e9e9e9;
+    cursor: pointer;
+    color: #7b7b7b;
+    &:hover {
+        background-color: #2e90ff;
+        color: white;
+    }
+`;
+
+const SubmitText = styled.span``;
 
 function CreateContentPage() {
     const navigate = useNavigate();
@@ -338,8 +426,8 @@ function CreateContentPage() {
                         src="imgs/fi-rr-cross.svg"
                         onClick={() => handleMoveMainpage()}
                     />
-                    <PageTitle>밈등록</PageTitle>
-                    <CheckIcon src="imgs/fi-rr-check.svg" />
+                    <PageTitle>밈 등록하기</PageTitle>
+                    {/* <CheckIcon src="imgs/fi-rr-check.svg" /> */}
                 </HeaderContainer>
 
                 <MemeTitle placeholder="밈이름을 입력해주세요." />
@@ -347,14 +435,30 @@ function CreateContentPage() {
                 {/* 이미지가 업로드 되면 55vh, 아니면 40vh */}
                 {/* !! 는 불리언 값으면 변환하는 방법  */}
                 <UploadContainer hasFile={!!selectedFile}>
-                    <UploadTitle>업로드</UploadTitle>
-
-                    <UploadFileContainer onClick={handleFileUploadClick}>
-                        <UploadFileText>
-                            밈을 업로드해주세요.(png,jpg 형식)
-                        </UploadFileText>
-                        <UploadFileIcon src="imgs/fi-rr-upload.svg" />
-                    </UploadFileContainer>
+                    {!filerUrl && (
+                        <UploadFileContainer onClick={handleFileUploadClick}>
+                            <UploadFileIcon2 src="/imgs/imageIcon.svg" />
+                            <UploadFileText
+                                style={{
+                                    color: "#9D9D9D",
+                                    "border-bottom": "2px solid #9D9D9D",
+                                    "margin-top": "10px",
+                                }}
+                            >
+                                밈을 업로드 해주세요.
+                            </UploadFileText>
+                            <UploadFileText
+                                style={{
+                                    color: "#C4C4C4",
+                                    "font-size": "0.9rem",
+                                    "margin-top": "10px",
+                                }}
+                            >
+                                (png,jpg 형식)
+                            </UploadFileText>
+                            {/* <UploadFileIcon src="imgs/fi-rr-upload.svg" /> */}
+                        </UploadFileContainer>
+                    )}
 
                     <input
                         id="fileInput"
@@ -371,28 +475,27 @@ function CreateContentPage() {
                             </DeleteButton>
                         </UploadedImageContainer>
                     )}
-
-                    <UploadText placeholder="밈에 대한 세부 설명들을 적어주세요." />
                 </UploadContainer>
+
+                <MemeInfoContainer>
+                    <MemeInfoText>밈 설명</MemeInfoText>
+                    <UploadText placeholder="밈에 대한 세부 설명들을 적어주세요." />
+                </MemeInfoContainer>
 
                 <CategoryContainer>
                     <CategoryTitle>카테고리</CategoryTitle>
                     <Categories>
-                        {[
-                            "카테고리1",
-                            "카테고리2",
-                            "카테고리3",
-                            "카테고리4",
-                            "카테고리5",
-                        ].map((category) => (
-                            <Category
-                                key={category}
-                                isSelected={selectedCategory === category}
-                                onClick={() => handleSetCategory(category)}
-                            >
-                                {category}
-                            </Category>
-                        ))}
+                        {["미안", "분노", "큐트", "감사", "웃김"].map(
+                            (category) => (
+                                <Category
+                                    key={category}
+                                    isSelected={selectedCategory === category}
+                                    onClick={() => handleSetCategory(category)}
+                                >
+                                    {category}
+                                </Category>
+                            )
+                        )}
                     </Categories>
                 </CategoryContainer>
 
@@ -406,7 +509,7 @@ function CreateContentPage() {
                     <TagInputContainer>
                         <TagInput
                             id="inputTag"
-                            placeholder="입력해주세요. (1~10글자)"
+                            placeholder="태그를 추가해주세요 (1~10글자)"
                             onChange={handleInputChange}
                             value={inputTag}
                         />
@@ -429,6 +532,11 @@ function CreateContentPage() {
                             : null}
                     </Tags>
                 </TagContainer>
+                <SubmitContainer>
+                    <SubmitBtn onClick={handleMoveMainpage}>
+                        <SubmitText>등록하기</SubmitText>
+                    </SubmitBtn>
+                </SubmitContainer>
             </MainContainer>
         </TopContainer>
     );

@@ -2,18 +2,23 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const TopContainer = styled.div`
-    width: 56px;
-    height: 56px;
-    background-color: black;
+    width: 75px;
+    height: 75px;
+    background-color: #2e90ff;
     border-radius: 50%;
     position: absolute;
     cursor: pointer;
-    bottom: 5%;
+    bottom: 12%;
     right: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0px 4px 4px black;
+
+    @media (max-width: 470px) {
+        width: 74px;
+        height: 74px;
+    }
 `;
 
 const Img = styled.img`

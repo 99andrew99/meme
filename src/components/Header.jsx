@@ -31,30 +31,31 @@ const HeaderContainer = styled.div`
     width: 100%;
     height: 12vh;
     position: relative;
+    background-color: #262626;
 `;
 
 const MenuContainer = styled.div`
     display: flex;
     width: 100%;
     height: 5vh;
-    justify-content: space-between;
-    border-bottom: 1px solid #d4d4d4;
+    /* justify-content: center; */
     align-items: center;
+    position: relative;
 `;
 
-const Title = styled.div`
-    color: black;
-    font-size: 20px;
-    font-weight: 600;
-    margin-left: 10px;
+const TitleIcon = styled.img`
     cursor: pointer;
+    margin-left: 10px;
 `;
 
 const HamburgerIcon = styled.img`
     width: 25px;
     height: 25px;
     cursor: pointer;
-    margin-right: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
 `;
 
 const SearchContainer = styled.div`
@@ -76,9 +77,11 @@ const SearchInput = styled.input`
     color: black;
     font-size: 1.1rem;
     font-weight: 500;
-    background-color: #e3e3e3;
+    background-color: #ffffff;
     border: none;
     padding-left: 10px;
+    position: relative;
+
     &::placeholder {
         color: #909090;
     }
@@ -128,7 +131,7 @@ const SearchHistoryText = styled.div`
 
 const HamburgerContainer = styled.div`
     width: 100%;
-    height: 50vh;
+    /* height: 50vh; */
     background-color: #272727;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -150,6 +153,8 @@ const HamburgerContainer = styled.div`
 
 const HamLogoContainer = styled.div`
     display: flex;
+    /* justify-content: center; */
+    position: relative;
     align-items: center;
     height: 50px;
 `;
@@ -162,7 +167,9 @@ const HamServiceName = styled.div`
 const HamInfoText = styled.div`
     height: 50px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
 `;
 
 const HamCategoryContainer = styled.div``;
@@ -171,10 +178,11 @@ const HamCatergory = styled.div`
     height: 55px;
     display: flex;
     align-items: center;
+    position: relative;
     margin: 2px;
     border-bottom: 1px solid #3a3a3b;
     font-size: 14px;
-    padding-left: 30px;
+    /* padding-left: 30px; */
 
     &:hover {
         background-color: #3a3a3b;
@@ -212,6 +220,29 @@ const IconInputContainer = styled.div`
     padding-right: 10px;
 `;
 
+const InputCloseIcon = styled.img`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    cursor: pointer;
+`;
+
+const HamCatergoryIcon = styled.img``;
+
+const HamCatergoryText = styled.span`
+    font-size: 1.1rem;
+    color: #c4c4c4;
+    margin-left: 15px;
+`;
+
+const HamCatergoryIcon2 = styled.img`
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+`;
+
 // 메인 페이지라면 뒤로가기 버튼 표시하지 않음.
 // 다른 페이지라면 뒤로가기 버튼 표시.
 function Header({ isOther }) {
@@ -221,6 +252,19 @@ function Header({ isOther }) {
     const hamContainerRef = useRef(null);
     const [authInfo, setAuthInfo] = useRecoilState(authState);
     const navigate = useNavigate();
+    const [searchInput, setSearchInput] = useState("");
+
+    const moveMainPage = () => {
+        navigate("/");
+    };
+
+    const handleChangeInput = (event) => {
+        setSearchInput(event.target.value);
+    };
+
+    const delInput = () => {
+        setSearchInput("");
+    };
 
     const handleOpenHam = () => {
         setIsHam(true);
@@ -275,10 +319,15 @@ function Header({ isOther }) {
         navigate(-1);
     };
 
+    const moveCategory = (event) => {
+        const category = event.target.textContent;
+        navigate(`/category/${category}`);
+    };
+
     return (
         <HeaderContainer>
             <MenuContainer>
-                <Title>mememoa</Title>
+                <TitleIcon src="/imgs/mememoaLogo.svg" onClick={moveMainPage} />
                 <HamburgerIcon src="imgs/burger.svg" onClick={handleOpenHam} />
             </MenuContainer>
 
@@ -295,6 +344,12 @@ function Header({ isOther }) {
                         placeholder='  "무도 유니버스" 검색해보는 건 어때요?'
                         onFocus={handleFocus}
                         onBlur={handleBlur}
+                        onChange={handleChangeInput}
+                        value={searchInput}
+                    />
+                    <InputCloseIcon
+                        src="/imgs/icon_close.svg"
+                        onClick={delInput}
                     />
                 </IconInputContainer>
 
@@ -326,8 +381,11 @@ function Header({ isOther }) {
                     isclosing={isclosing ? 1 : 0}
                 >
                     <HamLogoContainer>
-                        <img src={"imgs/tempLogo.png"} />
-                        <HamServiceName>mememoa</HamServiceName>
+                        <TitleIcon
+                            src="/imgs/mememoaLogo.svg"
+                            onClick={moveMainPage}
+                            style={{ "margin-left": "0" }}
+                        />
                         <img
                             src="imgs/logout.svg"
                             style={{
@@ -335,28 +393,53 @@ function Header({ isOther }) {
                                 height: "24px",
                                 marginLeft: "10px",
                                 cursor: "pointer",
+                                position: "absolute",
+                                top: "50%",
+                                right: "10px",
+                                transform: "translateY(-50%)",
                             }}
                             onClick={handleLogout}
                         />
                     </HamLogoContainer>
                     <HamInfoText>
-                        짤(다른 유형의 밈들도 추가 예정입니다!)
+                        <p
+                            style={{
+                                color: "#64B1FF",
+                                fontSize: "1.1rem",
+                                margin: "0",
+                            }}
+                        >
+                            짤
+                        </p>
+                        <p style={{ fontSize: "0.8rem", margin: "0" }}>
+                            다른 유형의 밈들도 추가 예정입니다.
+                        </p>
                     </HamInfoText>
                     <HamCategoryContainer>
-                        <HamCatergory onClick={handleCloseHam}>
-                            카테고리
+                        <HamCatergory onClick={moveCategory}>
+                            <HamCatergoryIcon src="/imgs/sorryIcon.svg" />
+                            <HamCatergoryText>미안</HamCatergoryText>
+                            <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={handleCloseHam}>
-                            카테고리
+                        <HamCatergory onClick={moveCategory}>
+                            <HamCatergoryIcon src="/imgs/upsetIcon.svg" />
+                            <HamCatergoryText>분노</HamCatergoryText>
+                            <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={handleCloseHam}>
-                            카테고리
+                        <HamCatergory onClick={moveCategory}>
+                            <HamCatergoryIcon src="/imgs/cuteIcon.svg" />
+                            <HamCatergoryText>큐트</HamCatergoryText>
+                            <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={handleCloseHam}>
-                            카테고리
+                        <HamCatergory onClick={moveCategory}>
+                            <HamCatergoryIcon src="/imgs/thanksIcon.svg" />
+                            <HamCatergoryText>감사</HamCatergoryText>
+                            <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={handleCloseHam}>
-                            카테고리
+                        <HamCatergory onClick={moveCategory}>
+                            <HamCatergoryIcon src="/imgs/funnyIcon.svg" />
+                            <HamCatergoryText>웃김</HamCatergoryText>
+                            <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
                     </HamCategoryContainer>
                     <HamCloseIconContainer>

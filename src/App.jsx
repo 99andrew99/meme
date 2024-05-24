@@ -9,6 +9,8 @@ import Signup from "./pages/Signup";
 import MainPage from "./pages/MainPage";
 import CreateContentPage from "./pages/CreateContentPage";
 import DetailPage from "./pages/DetailPage";
+import CategoryPage from "./pages/CategoryPage";
+
 //로그인
 import KakaoCallback from "./pages/KakaoCallback";
 
@@ -40,6 +42,10 @@ function App() {
                 <Route path="/main" element={<MainPage />} />
                 <Route path="/create" element={<CreateContentPage />} />
                 <Route path="/detail/:contentId" element={<DetailPage />} />
+                <Route
+                    path="/category/:categoryName"
+                    element={<CategoryPage />}
+                />
                 <Route
                     path="/oauth/callback/kakao"
                     element={<KakaoCallback />}

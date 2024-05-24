@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const TopContainer = styled.div`
@@ -31,20 +33,13 @@ const MainImg = styled.img`
 const Header = styled.div`
     display: flex;
     height: 10vh;
+    width: 100%;
+    position: absolute;
     /* background-color: tomato; */
     align-items: center;
     box-sizing: border-box;
     padding: 20px;
     justify-content: space-between;
-`;
-
-const Name = styled.span`
-    font-size: 1.3rem;
-    font-weight: 500;
-
-    @media (max-width: 480px) {
-        font-size: 1.1rem;
-    }
 `;
 
 const IconContainer = styled.div`
@@ -60,60 +55,193 @@ const HeaderIcon = styled.img`
     cursor: pointer;
 `;
 
-const MainContents = styled.div`
-    width: 100%;
-    height: 10vh;
-    word-wrap: break-word; /* 긴 단어도 줄바꿈 */
-    white-space: normal; /* 줄바꿈 활성화 */
-    font-size: 1.3rem;
-    font-weight: 500;
+const TagContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+`;
+
+const TagTitle = styled.p`
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
 `;
 
 const Tags = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 20px;
-    box-sizing: border-box;
-    padding: 20px;
+    margin-bottom: 20px;
 `;
 
 const Tag = styled.div`
-    background-color: black;
+    background-color: #434343;
     color: white;
     box-sizing: border-box;
     padding: 10px;
     border-radius: 20px;
     display: flex;
     align-items: center;
+    font-weight: 300;
+    font-size: 0.9rem;
+`;
+
+const SharePopup = styled.div`
+    width: 100%;
+    height: 5vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+const CategoryContainer = styled.div`
+    box-sizing: border-box;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    /* height: 8vh; */
+    cursor: pointer;
+    border-bottom: 1px solid #e9e9e9;
+    padding-top: 20px;
+    padding-bottom: 20px;
+`;
+
+const CategoryText = styled.span`
+    color: #555555;
+`;
+const CategoryImg = styled.img`
+    margin-left: 5px;
+`;
+
+const MainContentsContainer = styled.div`
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    /* height: 30vh; */
+    /* justify-content: space-around; */
+    border-bottom: 12px solid #e9e9e9;
+`;
+
+const MainContentsTitle = styled.p`
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 1.5rem;
+`;
+
+const MainContents = styled.div`
+    width: 100%;
+    word-wrap: break-word; /* 긴 단어도 줄바꿈 */
+    white-space: normal; /* 줄바꿈 활성화 */
+    font-size: 1.3rem;
+    font-weight: 500;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #434343;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 20px;
 `;
 
 function DetailPage() {
+    const [isShare, setIsShare] = useState(false);
+    const [isPrepare, setIsPrepare] = useState(false);
+    const navigate = useNavigate();
+
+    const handleShare = () => {
+        setIsShare(true);
+
+        setTimeout(() => {
+            setIsShare(false);
+        }, 3000);
+    };
+
+    const handlePrepare = () => {
+        setIsPrepare(true);
+
+        setTimeout(() => {
+            setIsPrepare(false);
+        }, 3000);
+    };
+
+    const handleMoveBack = () => {
+        navigate(-1);
+    };
+
+    const handleMoveCategory = (category) => {
+        navigate(`/category/${category}`);
+    };
+
     return (
         <TopContainer>
             <MainContainer>
                 <MainImg src="/imgs/danso.png" />
 
                 <Header>
-                    <Name>터벅터벅터벅 나의 일상</Name>
+                    <HeaderIcon
+                        src="/imgs/icon_back.svg"
+                        onClick={handleMoveBack}
+                    />
                     <IconContainer>
-                        <HeaderIcon src="/imgs/fi-rr-bookmark.svg" />
-                        <HeaderIcon src="/imgs/fi-rr-heart.svg" />
-                        <HeaderIcon src="/imgs/fi-rr-share.svg" />
+                        <HeaderIcon
+                            src="/imgs/fi-rr-bookmark.svg"
+                            onClick={handlePrepare}
+                        />
+                        <HeaderIcon
+                            src="/imgs/fi-rr-heart.svg"
+                            onClick={handlePrepare}
+                        />
+                        <HeaderIcon
+                            src="/imgs/fi-rr-share.svg"
+                            onClick={handleShare}
+                        />
                     </IconContainer>
                 </Header>
 
-                <MainContents>터벅터벅이다 터벅터벅</MainContents>
+                {isShare && <SharePopup>링크가 공유되었습니다.</SharePopup>}
+                {isPrepare && (
+                    <SharePopup>
+                        아이~ 씨X 시민을 위해 일하고 있었는데 미치겠다!
+                    </SharePopup>
+                )}
 
-                <Tags>
-                    <Tag>#1호선</Tag>
-                    <Tag>#단소살인마</Tag>
-                    <Tag>#터벅터벅나의일상</Tag>
-                    <Tag>#팍씨안때려</Tag>
-                    <Tag>#팍씨안때려</Tag>
-                </Tags>
+                <CategoryContainer onClick={() => handleMoveCategory("웃김")}>
+                    <CategoryText>웃김</CategoryText>
+                    <CategoryImg src="/imgs/icon_right.svg" />
+                </CategoryContainer>
+
+                <MainContentsContainer>
+                    <MainContentsTitle>밈 이름</MainContentsTitle>
+                    <MainContents>
+                        밈에 관한 설명입니다.밈에 관한 설명입니다.밈에 관한
+                        설명입니다.밈에 관한 설명입니다.밈에 관한
+                        설명입니다.밈에 관한 설명입니다.
+                    </MainContents>
+                </MainContentsContainer>
+
+                <TagContainer>
+                    <TagTitle>태그</TagTitle>
+                    <Tags>
+                        <Tag>#1호선</Tag>
+                        <Tag>#단소살인마</Tag>
+                        <Tag>#터벅터벅나의일상</Tag>
+                        <Tag>#팍씨안때려</Tag>
+                        <Tag>#팍씨안때려</Tag>
+                    </Tags>
+                </TagContainer>
             </MainContainer>
         </TopContainer>
     );
