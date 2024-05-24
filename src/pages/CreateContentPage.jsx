@@ -14,7 +14,7 @@ const TopContainer = styled.div`
     background-color: black;
 
     @media (min-height: 900px) {
-        height: 100vh;
+        /* height: 100vh; */
     }
 `;
 
@@ -37,7 +37,7 @@ const MainContainer = styled.div`
 
 const HeaderContainer = styled.div`
     width: 100%;
-    height: 5vh;
+    /* height: 5vh; */
     background-color: #f5f5f5;
     display: flex;
     align-items: center;
@@ -65,8 +65,11 @@ const CloseIcon = styled.img`
 const PageTitle = styled.span`
     font-size: 1.1rem;
     color: #434343;
+    margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
+
     @media (max-width: 480px) {
         font-size: 1rem;
     }
@@ -84,13 +87,15 @@ const CheckIcon = styled.img`
 `;
 
 const MemeTitle = styled.input`
-    height: 7vh;
+    /* height: 7vh; */
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #e3e3e3;
     font-size: 1.4rem;
     font-weight: 500;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
+    padding-top: 20px;
+    padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
     &::placeholder {
@@ -121,7 +126,7 @@ const UploadContainer = styled.div`
 const UploadTitle = styled.span`
     font-size: 1rem;
     font-weight: 500;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 `;
 
 const UploadFileContainer = styled.div`
@@ -130,9 +135,11 @@ const UploadFileContainer = styled.div`
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    padding: 15px;
-    height: 20vh;
+    /* box-sizing: border-box; */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 75px;
+    padding-bottom: 75px;
     align-items: center;
     justify-content: center;
 `;
@@ -149,7 +156,7 @@ const UploadFileIcon = styled.img`
 `;
 
 const UploadText = styled.textarea`
-    height: 6vh;
+    /* height: 6vh; */
     font-size: 0.9rem;
     font-weight: 400;
     background-color: #eeeeee;
@@ -157,6 +164,7 @@ const UploadText = styled.textarea`
     padding: 15px;
     border: none;
     border-radius: 10px;
+    margin-bottom: 20px;
     &::placeholder {
         color: #7f7f7f;
     }
@@ -167,12 +175,15 @@ const UploadedImageContainer = styled.div`
     /* margin-top: 10px; */
     box-sizing: border-box;
     /* padding: 15px; */
-    height: 20vh;
+
+    /* height: 20vh; */
+    /* height: 100%; */
 
     img {
         box-sizing: border-box;
         width: 100%;
-        height: 100%;
+        height: 242.9px;
+
         /* border-radius: 10px; */
     }
 `;
@@ -199,27 +210,31 @@ const DeleteButton = styled.button`
 const CategoryContainer = styled.div`
     display: flex;
     flex-direction: column;
-    height: 20vh;
+    /* height: 20vh; */
     justify-content: space-around;
     /* margin-top: 20px; */
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
     border-bottom: 12px solid #e3e3e3;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
 
     @media (max-height: 700px) {
-        height: 25vh;
+        /* height: 25vh; */
     }
 `;
 
-const CategoryTitle = styled(UploadTitle)``;
+const CategoryTitle = styled(UploadTitle)`
+    margin-top: 20px;
+    margin-bottom: 10px;
+`;
 
 const Categories = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    margin-bottom: 20px;
 `;
 const Category = styled.div`
     width: 105px;
@@ -239,16 +254,18 @@ const TagContainer = styled.div`
     flex-direction: column;
     /* height: 30vh; */
     /* background-color: tomato; */
-    margin-top: 20px;
+
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
 `;
 
 const TagTitleContainer = styled.div`
-    height: 5vh;
+    /* height: 5vh; */
     display: flex;
     align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
 `;
 
 const TagTitle = styled(UploadTitle)`
@@ -262,7 +279,7 @@ const TagTitleInfo = styled.span`
 `;
 
 const TagInputContainer = styled.div`
-    height: 6vh;
+    /* height: 6vh; */
     background-color: #eeeeee;
     border-radius: 10px;
     box-sizing: border-box;
@@ -272,6 +289,8 @@ const TagInputContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
 `;
 const TagInput = styled.input`
     background-color: transparent;
@@ -298,11 +317,14 @@ const Tags = styled.div`
 
 const Tag = styled.div`
     background-color: transparent;
-    border: 1px solid #bfbfbf;
-    color: #bfbfbf;
+    border: 1px solid #434343;
+    color: #767676;
     box-sizing: border-box;
-    padding: 10px;
-    border-radius: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 30px;
     display: flex;
     align-items: center;
 `;
@@ -315,7 +337,7 @@ const TagDelIcon = styled.img`
 const UploadFileIcon2 = styled.img``;
 
 const MemeInfoContainer = styled.div`
-    height: 15vh;
+    /* height: 15vh; */
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
@@ -323,14 +345,15 @@ const MemeInfoContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     border-bottom: 12px solid #e3e3e3;
-    padding-top: 10px;
-    padding-bottom: 10px;
 `;
 
-const MemeInfoText = styled(UploadTitle)``;
+const MemeInfoText = styled(UploadTitle)`
+    margin-top: 20px;
+    margin-bottom: 10px;
+`;
 
 const SubmitContainer = styled.div`
-    height: 12.5 vh;
+    /* height: 12.5 vh; */
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
@@ -338,16 +361,18 @@ const SubmitContainer = styled.div`
     align-items: center;
     justify-content: center;
     margin-top: 50px;
+    margin-bottom: 20px;
 `;
 
 const SubmitBtn = styled.div`
     width: 100%;
-    height: 5vh;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     background-color: #e9e9e9;
+
     cursor: pointer;
     color: #7b7b7b;
     &:hover {

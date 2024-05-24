@@ -13,7 +13,7 @@ const TopContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 4px 4px black;
+    box-shadow: 0px 0px 12px black;
 
     @media (max-width: 470px) {
         width: 74px;

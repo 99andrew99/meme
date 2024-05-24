@@ -29,7 +29,7 @@ const HeaderContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 12vh;
+    height: 118px;
     position: relative;
     background-color: #262626;
 `;
@@ -37,7 +37,10 @@ const HeaderContainer = styled.div`
 const MenuContainer = styled.div`
     display: flex;
     width: 100%;
-    height: 5vh;
+    margin-top: 22px;
+    margin-bottom: 16px;
+
+    /* height: 5vh; */
     /* justify-content: center; */
     align-items: center;
     position: relative;
@@ -60,19 +63,20 @@ const HamburgerIcon = styled.img`
 
 const SearchContainer = styled.div`
     width: 100%;
-    height: 7vh;
+    /* height: 7vh; */
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
     position: relative;
+    margin-bottom: 15px;
 `;
 
 const SearchInput = styled.input`
     /* width: calc(100% - 20px); */
     width: 100%;
     box-sizing: border-box;
-    height: 4vh;
+    height: 40px;
     border-radius: 10px;
     color: black;
     font-size: 1.1rem;

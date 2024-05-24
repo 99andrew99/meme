@@ -24,6 +24,7 @@ const MainContainer = styled.div`
 `;
 
 function CategoryPage({ category }) {
+    console.log(category);
     return (
         <TopContainer>
             <MainContainer>{category}</MainContainer>

@@ -77,7 +77,7 @@ function Contents() {
             <ContentsHeader>
                 {/* 총 짤의 개수 */}
                 <ContentsNumText>
-                    총<ContentsNum> 80</ContentsNum>개의 짤들이 등록되었어요!
+                    총<ContentsNum> N</ContentsNum>개의 짤들이 등록되었어요!
                 </ContentsNumText>
                 {/* 필터링 */}
             </ContentsHeader>

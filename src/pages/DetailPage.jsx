@@ -78,8 +78,9 @@ const Tags = styled.div`
 `;
 
 const Tag = styled.div`
-    background-color: #434343;
-    color: white;
+    background-color: transparent;
+    color: #434343;
+    border: 1px solid #434343;
     box-sizing: border-box;
     padding: 10px;
     border-radius: 20px;
