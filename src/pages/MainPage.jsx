@@ -86,7 +86,7 @@ function MainPage() {
                 <Header isOther={false} />
                 {/* <Categories /> */}
                 {/* <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn> */}
-                <Contents />
+                <Contents isHeader={true} />
 
                 <FloatingBtn />
             </MainContainer>

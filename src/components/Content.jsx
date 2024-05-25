@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const TopContainer = styled.div`
     width: 166px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 195px;
     display: flex;
     flex-direction: column;
@@ -13,6 +13,7 @@ const TopContainer = styled.div`
     cursor: pointer;
     margin-left: auto;
     margin-right: auto;
+    background-color: #e9e9e9;
 `;
 
 const TagContainer = styled.div`
@@ -28,7 +29,7 @@ const TagContainer = styled.div`
 const Tag = styled.div`
     height: 20px;
     box-sizing: border-box;
-    background-color: black;
+    background-color: #262626;
     color: white;
     border-radius: 20px;
     display: flex;
@@ -83,7 +84,7 @@ function Content({ num }) {
             <TagContainer ref={containerRef}>
                 {visibleTags[0] && <Tag>#태그 1</Tag>}
                 {visibleTags[1] && <Tag>#태그 2</Tag>}
-                {visibleTags[2] && <Tag>#태그 3aasdaaa</Tag>}
+                {visibleTags[2] && <Tag>#태그 3</Tag>}
             </TagContainer>
         </TopContainer>
     );

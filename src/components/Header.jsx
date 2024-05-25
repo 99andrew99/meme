@@ -32,6 +32,7 @@ const HeaderContainer = styled.div`
     height: 118px;
     position: relative;
     background-color: #262626;
+    z-index: 3;
 `;
 
 const MenuContainer = styled.div`
@@ -39,7 +40,6 @@ const MenuContainer = styled.div`
     width: 100%;
     margin-top: 22px;
     margin-bottom: 16px;
-
     /* height: 5vh; */
     /* justify-content: center; */
     align-items: center;
@@ -72,6 +72,12 @@ const SearchContainer = styled.div`
     margin-bottom: 15px;
 `;
 
+const SearchInputSubContainer = styled.div`
+    width: 100%;
+    height: 40px;
+    position: relative;
+`;
+
 const SearchInput = styled.input`
     /* width: calc(100% - 20px); */
     width: 100%;
@@ -79,11 +85,11 @@ const SearchInput = styled.input`
     height: 40px;
     border-radius: 10px;
     color: black;
-    font-size: 1.1rem;
+    font-size: 15px;
     font-weight: 500;
     background-color: #ffffff;
     border: none;
-    padding-left: 10px;
+    padding-left: 35px;
     position: relative;
 
     &::placeholder {
@@ -145,6 +151,7 @@ const HamburgerContainer = styled.div`
     box-sizing: border-box;
     padding-left: 50px;
     padding-right: 50px;
+    z-index: 2;
     animation: ${({ isclosing }) =>
         isclosing
             ? css`
@@ -209,9 +216,10 @@ const HamCloseIcon = styled.img`
 `;
 
 const BackIcon = styled.img`
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     margin-right: 20px;
+    cursor: pointer;
 `;
 
 const IconInputContainer = styled.div`
@@ -222,6 +230,14 @@ const IconInputContainer = styled.div`
     box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
+`;
+
+const InputSearchIcon = styled.img`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    z-index: 1;
 `;
 
 const InputCloseIcon = styled.img`
@@ -339,18 +355,23 @@ function Header({ isOther }) {
                 <IconInputContainer>
                     {isOther && (
                         <BackIcon
-                            src="imgs/Expand_left.svg"
+                            src="imgs/Expand_left_gray.svg"
                             onClick={moveBack}
                         />
                     )}
-                    <SearchInput
-                        type="text"
-                        placeholder='  "무도 유니버스" 검색해보는 건 어때요?'
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        onChange={handleChangeInput}
-                        value={searchInput}
-                    />
+
+                    <SearchInputSubContainer>
+                        <InputSearchIcon src="/imgs/icon_search.svg" />
+                        <SearchInput
+                            type="text"
+                            placeholder='"무도 유니버스" 검색해보는 건 어때요?'
+                            onFocus={handleFocus}
+                            onBlur={handleBlur}
+                            onChange={handleChangeInput}
+                            value={searchInput}
+                        />
+                    </SearchInputSubContainer>
+
                     <InputCloseIcon
                         src="/imgs/icon_close.svg"
                         onClick={delInput}

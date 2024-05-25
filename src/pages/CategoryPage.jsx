@@ -1,5 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import Contents from "../components/Contents";
 const TopContainer = styled.div`
     width: 100vw;
     height: 100vh;
@@ -23,11 +24,71 @@ const MainContainer = styled.div`
     }
 `;
 
+const BackIcon = styled.img`
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-top: 24px;
+    margin-left: 20px;
+`;
+
+const CategoryTitleContainer = styled.p`
+    width: 100%;
+    margin-top: 34px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+`;
+const CategoryTitleIcon = styled.img`
+    width: 24px;
+    height: 24px;
+`;
+const CategoryTitleText = styled.span`
+    font-size: 24px;
+    font-weight: 500;
+    margin-left: 10px;
+`;
+
+const CategoryInfoContainer = styled.div`
+    display: flex;
+    margin-top: 24px;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-bottom: 20px;
+`;
+const CategoryInfoText = styled.span`
+    font-size: 14px;
+    color: #434343;
+`;
+
 function CategoryPage({ category }) {
-    console.log(category);
+    const navigate = useNavigate();
+
+    const moveBack = () => {
+        navigate(-1);
+    };
     return (
         <TopContainer>
-            <MainContainer>{category}</MainContainer>
+            <MainContainer>
+                <BackIcon src="/imgs/Expand_left_gray.svg" onClick={moveBack} />
+                <CategoryTitleContainer>
+                    <CategoryTitleIcon src="/imgs/funnyIcon.svg" />
+                    <CategoryTitleText>웃김</CategoryTitleText>
+                </CategoryTitleContainer>
+                <CategoryInfoContainer>
+                    <CategoryInfoText>
+                        해당 카테고리에 대한 모음 페이지입니다.
+                    </CategoryInfoText>
+                    <CategoryInfoText>
+                        적절한 멘트와 소개입니다.
+                    </CategoryInfoText>
+                    <CategoryInfoText>
+                        세 줄까지 원하셔서 추가했습니다.
+                    </CategoryInfoText>
+                </CategoryInfoContainer>
+
+                <Contents isHeader={false} />
+            </MainContainer>
         </TopContainer>
     );
 }

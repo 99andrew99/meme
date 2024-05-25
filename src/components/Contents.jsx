@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 
 const TopContainer = styled.div`
     width: 100%;
-    height: 88vh;
+    /* height: 88vh; */
+    /* height: 80vh; */
+    /* height: 100%; */
     color: black;
+    overflow: hidden;
 `;
 
 const ContentsHeader = styled.div`
@@ -26,7 +29,7 @@ const ContentsContainer = styled.div`
     padding-left: 10px;
     padding-right: 10px;
     overflow-y: scroll;
-    height: 80vh;
+    height: 100%;
     &::-webkit-scrollbar {
         display: none;
     }
@@ -47,7 +50,7 @@ const dummyData = Array.from({ length: 100 }, (_, index) => ({
     id: index + 1,
 }));
 
-function Contents() {
+function Contents({ isHeader }) {
     const [data, setData] = useState([]);
     const [hasMore, setHasMore] = useState(true);
     const { ref, inView } = useInView();
@@ -74,13 +77,15 @@ function Contents() {
 
     return (
         <TopContainer>
-            <ContentsHeader>
-                {/* 총 짤의 개수 */}
-                <ContentsNumText>
-                    총<ContentsNum> N</ContentsNum>개의 짤들이 등록되었어요!
-                </ContentsNumText>
-                {/* 필터링 */}
-            </ContentsHeader>
+            {isHeader && (
+                <ContentsHeader>
+                    {/* 총 짤의 개수 */}
+                    <ContentsNumText>
+                        총<ContentsNum> N</ContentsNum>개의 짤들이 등록되었어요!
+                    </ContentsNumText>
+                    {/* 필터링 */}
+                </ContentsHeader>
+            )}
 
             <ContentsContainer>
                 {/* 여기 무한 스크롤 세로 */}
