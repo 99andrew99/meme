@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Contents from "../components/Contents";
+
 const TopContainer = styled.div`
     width: 100vw;
     height: 100vh;
@@ -8,7 +9,7 @@ const TopContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    size: 30px;
+    /* size: 30px; */
     background-color: black;
 `;
 
@@ -61,19 +62,34 @@ const CategoryInfoText = styled.span`
     color: #434343;
 `;
 
-function CategoryPage({ category }) {
+function CategoryPage() {
     const navigate = useNavigate();
+    const { categoryName } = useParams();
+    let iconUrl = "";
+
+    if (categoryName == "미안") {
+        iconUrl = "/imgs/sorryIcon.svg";
+    } else if (categoryName == "분노") {
+        iconUrl = "/imgs/upsetIcon.svg";
+    } else if (categoryName == "큐트") {
+        iconUrl = "/imgs/cuteIcon.svg";
+    } else if (categoryName == "감사") {
+        iconUrl = "/imgs/thanksIcon.svg";
+    } else if (categoryName == "웃김") {
+        iconUrl = "/imgs/funnyIcon.svg";
+    }
 
     const moveBack = () => {
         navigate(-1);
     };
+
     return (
         <TopContainer>
             <MainContainer>
                 <BackIcon src="/imgs/Expand_left_gray.svg" onClick={moveBack} />
                 <CategoryTitleContainer>
-                    <CategoryTitleIcon src="/imgs/funnyIcon.svg" />
-                    <CategoryTitleText>웃김</CategoryTitleText>
+                    <CategoryTitleIcon src={iconUrl} />
+                    <CategoryTitleText>{categoryName}</CategoryTitleText>
                 </CategoryTitleContainer>
                 <CategoryInfoContainer>
                     <CategoryInfoText>

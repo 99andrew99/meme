@@ -10,6 +10,7 @@ import MainPage from "./pages/MainPage";
 import CreateContentPage from "./pages/CreateContentPage";
 import DetailPage from "./pages/DetailPage";
 import CategoryPage from "./pages/CategoryPage";
+import SearchPage from "./pages/SearchPage";
 
 //로그인
 import KakaoCallback from "./pages/KakaoCallback";
@@ -46,6 +47,7 @@ function App() {
                     path="/category/:categoryName"
                     element={<CategoryPage />}
                 />
+                <Route path="/search/:searchName" element={<SearchPage />} />
                 <Route
                     path="/oauth/callback/kakao"
                     element={<KakaoCallback />}

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled, { keyframes, css } from "styled-components";
 import { useRecoilState } from "recoil";
 import { authState } from "../atoms/authState";
@@ -287,6 +287,14 @@ function Header({ isOther }) {
     const [authInfo, setAuthInfo] = useRecoilState(authState);
     const navigate = useNavigate();
     const [searchInput, setSearchInput] = useState("");
+    // const [searchValue, setSearchValue] = useState('');
+    const { searchName } = useParams();
+
+    useEffect(() => {
+        if (searchName) {
+            setSearchInput(searchName);
+        }
+    }, [searchName]);
 
     const handleHistoryDel = () => {
         console.log("del");
@@ -322,7 +330,6 @@ function Header({ isOther }) {
     };
 
     const handleBlur = (event) => {
-        // Check if the new focused element is inside SearchHistory or not
         if (
             searchHistoryRef.current &&
             !searchHistoryRef.current.contains(event.relatedTarget) &&
@@ -369,9 +376,15 @@ function Header({ isOther }) {
         navigate(-1);
     };
 
-    const moveCategory = (event) => {
-        const category = event.target.textContent;
+    const moveCategory = (category) => {
         navigate(`/category/${category}`);
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            setIsFocus(false);
+            navigate(`/search/${searchInput}`);
+        }
     };
 
     const getRandomPlaceholder = () => {
@@ -395,14 +408,14 @@ function Header({ isOther }) {
         <HeaderContainer>
             <MenuContainer>
                 <TitleIcon src="/imgs/mememoaLogo.svg" onClick={moveMainPage} />
-                <HamburgerIcon src="imgs/burger.svg" onClick={handleOpenHam} />
+                <HamburgerIcon src="/imgs/burger.svg" onClick={handleOpenHam} />
             </MenuContainer>
 
             <SearchContainer>
                 <IconInputContainer>
                     {isOther && (
                         <BackIcon
-                            src="imgs/Expand_left_gray.svg"
+                            src="/imgs/Expand_left_gray.svg"
                             onClick={moveBack}
                         />
                     )}
@@ -415,6 +428,7 @@ function Header({ isOther }) {
                             onFocus={handleFocus}
                             onBlur={handleBlur}
                             onChange={handleChangeInput}
+                            onKeyPress={handleKeyPress}
                             value={searchInput}
                             ref={searchInputRef}
                         />
@@ -483,7 +497,7 @@ function Header({ isOther }) {
                             style={{ marginLeft: "0" }}
                         />
                         <img
-                            src="imgs/logout.svg"
+                            src="/imgs/logout.svg"
                             style={{
                                 width: "24px",
                                 height: "24px",
@@ -512,27 +526,27 @@ function Header({ isOther }) {
                         </p>
                     </HamInfoText>
                     <HamCategoryContainer>
-                        <HamCatergory onClick={moveCategory}>
+                        <HamCatergory onClick={() => moveCategory("미안")}>
                             <HamCatergoryIcon src="/imgs/sorryIcon.svg" />
                             <HamCatergoryText>미안</HamCatergoryText>
                             <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={moveCategory}>
+                        <HamCatergory onClick={() => moveCategory("분노")}>
                             <HamCatergoryIcon src="/imgs/upsetIcon.svg" />
                             <HamCatergoryText>분노</HamCatergoryText>
                             <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={moveCategory}>
+                        <HamCatergory onClick={() => moveCategory("큐트")}>
                             <HamCatergoryIcon src="/imgs/cuteIcon.svg" />
                             <HamCatergoryText>큐트</HamCatergoryText>
                             <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={moveCategory}>
+                        <HamCatergory onClick={() => moveCategory("감사")}>
                             <HamCatergoryIcon src="/imgs/thanksIcon.svg" />
                             <HamCatergoryText>감사</HamCatergoryText>
                             <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
                         </HamCatergory>
-                        <HamCatergory onClick={moveCategory}>
+                        <HamCatergory onClick={() => moveCategory("웃김")}>
                             <HamCatergoryIcon src="/imgs/funnyIcon.svg" />
                             <HamCatergoryText>웃김</HamCatergoryText>
                             <HamCatergoryIcon2 src="/imgs/Chevron-Right.svg" />
@@ -540,7 +554,7 @@ function Header({ isOther }) {
                     </HamCategoryContainer>
                     <HamCloseIconContainer>
                         <HamCloseIcon
-                            src={"imgs/caretUp.png"}
+                            src={"/imgs/caretUp.png"}
                             onClick={handleCloseHam}
                         />
                     </HamCloseIconContainer>

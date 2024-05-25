@@ -4,7 +4,9 @@ import styled from "styled-components";
 const CategoryContainer = styled.div`
     /* 마진 탑 임시 */
     width: 100%;
-    height: 8vh;
+    /* height: 8vh; */
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -19,20 +21,27 @@ const CategoryContainer = styled.div`
 `;
 
 const Category = styled.div`
-    width: 100px;
-    height: 4vh;
+    height: 31px;
+
+    /* height: 4vh; */
     background-color: white;
     color: black;
-    border: 1px solid black;
-    border-radius: 20px;
+    border: 1px solid #7b7b7b;
+    border-radius: 3px;
     margin: 5px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: #7b7b7b;
 
     &:hover {
-        background-color: black;
+        background-color: #7b7b7b;
         color: white;
     }
 `;
@@ -70,15 +79,11 @@ function Categories() {
             isDragging={isDragging}
         >
             {/* 여기 가로 스크롤 */}
-            <Category>#무한도전1</Category>
-            <Category>#무한도전2</Category>
-            <Category>#무한도전3</Category>
-            <Category>#무한도전4</Category>
-            <Category>#무한도전5</Category>
-            <Category>#무한도전6</Category>
-            <Category>#무한도전7</Category>
-            <Category>#무한도전8</Category>
-            <Category>#무한도전9</Category>
+            <Category>연관 키워드</Category>
+            <Category>연관 키워드</Category>
+            <Category>연관 키워드</Category>
+            <Category>연관 키워드</Category>
+            <Category>연관 키워드</Category>
         </CategoryContainer>
     );
 }

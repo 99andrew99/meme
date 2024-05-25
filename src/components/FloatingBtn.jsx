@@ -36,7 +36,7 @@ function FloatingBtn() {
 
     return (
         <TopContainer onClick={moveToCreate}>
-            <Img src="imgs/add-24px.svg" />
+            <Img src="/imgs/add-24px.svg" />
         </TopContainer>
     );
 }
