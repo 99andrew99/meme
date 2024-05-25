@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes, css } from "styled-components";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { authState } from "../atoms/authState";
 
 const slideDown = keyframes`
@@ -22,7 +22,6 @@ const slideUp = keyframes`
     to {
         transform: translateY(-100%);
     }
-
 `;
 
 const HeaderContainer = styled.div`
@@ -40,8 +39,6 @@ const MenuContainer = styled.div`
     width: 100%;
     margin-top: 22px;
     margin-bottom: 16px;
-    /* height: 5vh; */
-    /* justify-content: center; */
     align-items: center;
     position: relative;
 `;
@@ -63,7 +60,6 @@ const HamburgerIcon = styled.img`
 
 const SearchContainer = styled.div`
     width: 100%;
-    /* height: 7vh; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,7 +75,6 @@ const SearchInputSubContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-    /* width: calc(100% - 20px); */
     width: 100%;
     box-sizing: border-box;
     height: 40px;
@@ -101,15 +96,13 @@ const SearchHistory = styled.div`
     position: absolute;
     top: 5vh;
     width: 90%;
-    height: 15vh;
     background-color: white;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
     z-index: 1;
-    padding: 10px;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
     display: flex;
     flex-direction: column;
     color: black;
@@ -118,30 +111,54 @@ const SearchHistory = styled.div`
 const SearchHistoryHeader = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-top: 12px;
 `;
 
 const SearchHistoryTitle = styled.div`
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9d9d9d;
 `;
 
 const SearchHistoryDel = styled.div`
     cursor: pointer;
+    font-size: 14px;
 `;
 
 const SearchHistoryTexts = styled.div``;
 
-const SearchHistoryText = styled.div`
-    cursor: pointer;
-    margin-top: 10px;
-    margin-bottom: 10px;
+const SearchHistoryContainer = styled.div`
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
     &:hover {
         background-color: #d4d4d4;
     }
 `;
 
+const SearchHistoryIcon = styled.img`
+    width: 16px;
+    height: 16px;
+`;
+
+const SearchHistoryText = styled.span`
+    font-size: 16px;
+    color: #7b7b7b;
+    margin-left: 10px;
+    cursor: pointer;
+`;
+
+const SearchHistoryDelIcon = styled.img`
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+`;
+
 const HamburgerContainer = styled.div`
     width: 100%;
-    /* height: 50vh; */
     background-color: #272727;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -164,7 +181,6 @@ const HamburgerContainer = styled.div`
 
 const HamLogoContainer = styled.div`
     display: flex;
-    /* justify-content: center; */
     position: relative;
     align-items: center;
     height: 50px;
@@ -180,7 +196,6 @@ const HamInfoText = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* align-items: center; */
 `;
 
 const HamCategoryContainer = styled.div``;
@@ -193,7 +208,6 @@ const HamCatergory = styled.div`
     margin: 2px;
     border-bottom: 1px solid #3a3a3b;
     font-size: 14px;
-    /* padding-left: 30px; */
 
     &:hover {
         background-color: #3a3a3b;
@@ -263,16 +277,20 @@ const HamCatergoryIcon2 = styled.img`
     transform: translateY(-50%);
 `;
 
-// 메인 페이지라면 뒤로가기 버튼 표시하지 않음.
-// 다른 페이지라면 뒤로가기 버튼 표시.
 function Header({ isOther }) {
     const [isFocus, setIsFocus] = useState(false);
     const [isHam, setIsHam] = useState(false);
     const [isclosing, setIsclosing] = useState(false);
     const hamContainerRef = useRef(null);
+    const searchHistoryRef = useRef(null);
+    const searchInputRef = useRef(null);
     const [authInfo, setAuthInfo] = useRecoilState(authState);
     const navigate = useNavigate();
     const [searchInput, setSearchInput] = useState("");
+
+    const handleHistoryDel = () => {
+        console.log("del");
+    };
 
     const moveMainPage = () => {
         navigate("/");
@@ -303,17 +321,30 @@ function Header({ isOther }) {
         setIsFocus(true);
     };
 
-    const handleBlur = () => {
-        setIsFocus(false);
+    const handleBlur = (event) => {
+        // Check if the new focused element is inside SearchHistory or not
+        if (
+            searchHistoryRef.current &&
+            !searchHistoryRef.current.contains(event.relatedTarget) &&
+            searchInputRef.current &&
+            !searchInputRef.current.contains(event.relatedTarget)
+        ) {
+            setIsFocus(false);
+        }
     };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
                 hamContainerRef.current &&
-                !hamContainerRef.current.contains(event.target)
+                !hamContainerRef.current.contains(event.target) &&
+                searchHistoryRef.current &&
+                !searchHistoryRef.current.contains(event.target) &&
+                searchInputRef.current &&
+                !searchInputRef.current.contains(event.target)
             ) {
                 handleCloseHam();
+                setIsFocus(false);
             }
         };
 
@@ -321,10 +352,9 @@ function Header({ isOther }) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [hamContainerRef]);
+    }, [hamContainerRef, searchHistoryRef, searchInputRef]);
 
     const handleLogout = () => {
-        console.log("들어옴");
         if (window.Kakao.Auth.getAccessToken()) {
             window.Kakao.Auth.logout(() => {
                 setAuthInfo({ token: null, user: null });
@@ -342,6 +372,23 @@ function Header({ isOther }) {
     const moveCategory = (event) => {
         const category = event.target.textContent;
         navigate(`/category/${category}`);
+    };
+
+    const getRandomPlaceholder = () => {
+        const placeholders = [
+            "‘무도 유니버스’ 검색해보는 건 어때요?",
+            "화가날 땐 밈모아에서 적절한 짤을 찾아보세요",
+            "미안할 땐 밈모아에서 적절한 짤을 찾아보세요",
+            "귀여운 짤을 찾고 계신가요 잘오셨습니다",
+            "기다리고 있었습니다 제대로 모시겠습니다",
+            "이 정도 짤도 밈모아에 나와요..?",
+            "꽁꽁 얼어붙은 밈모아 위로 밈들이 걸어다닙니다",
+            "내가 찾던 짤 밈모아에 있잖아 완전럭키비키잔앙",
+            "밈모아적 사고: 걍 일상이 밈으로 이루어져 있음",
+            "밈모아 사건: 내가 찾던 밈들이 밈모아에 다 들어와있는 사건이다",
+            "다들 밈모아 밈모아 하길래 들어와봤는데 밈모아",
+        ];
+        return placeholders[Math.floor(Math.random() * placeholders.length)];
     };
 
     return (
@@ -364,11 +411,12 @@ function Header({ isOther }) {
                         <InputSearchIcon src="/imgs/icon_search.svg" />
                         <SearchInput
                             type="text"
-                            placeholder='"무도 유니버스" 검색해보는 건 어때요?'
+                            placeholder={getRandomPlaceholder()}
                             onFocus={handleFocus}
                             onBlur={handleBlur}
                             onChange={handleChangeInput}
                             value={searchInput}
+                            ref={searchInputRef}
                         />
                     </SearchInputSubContainer>
 
@@ -379,23 +427,46 @@ function Header({ isOther }) {
                 </IconInputContainer>
 
                 {isFocus && (
-                    <SearchHistory>
+                    <SearchHistory
+                        ref={searchHistoryRef}
+                        onMouseDown={(e) => e.preventDefault()}
+                    >
                         <SearchHistoryHeader>
                             <SearchHistoryTitle>최근검색어</SearchHistoryTitle>
                             <SearchHistoryDel>전체삭제</SearchHistoryDel>
                         </SearchHistoryHeader>
+
                         <SearchHistoryTexts>
-                            <SearchHistoryText
-                                onMouseDown={() => {
-                                    console.log("꽁꽁");
-                                }}
-                            >
-                                꽁꽁 얼어붙은
-                            </SearchHistoryText>
-                            <SearchHistoryText>야레야레</SearchHistoryText>
-                            <SearchHistoryText>
-                                아이~ 씨x 시민을 위해서 어쩌구
-                            </SearchHistoryText>
+                            <SearchHistoryContainer>
+                                <SearchHistoryIcon src="/imgs/icon_search.svg" />
+                                <SearchHistoryText>
+                                    꽁꽁 얼어붙은
+                                </SearchHistoryText>
+                                <SearchHistoryDelIcon
+                                    src="/imgs/icon_cross_gray.svg"
+                                    onMouseDown={handleHistoryDel}
+                                />
+                            </SearchHistoryContainer>
+                            <SearchHistoryContainer>
+                                <SearchHistoryIcon src="/imgs/icon_search.svg" />
+                                <SearchHistoryText>
+                                    꽁꽁 얼어붙은
+                                </SearchHistoryText>
+                                <SearchHistoryDelIcon
+                                    src="/imgs/icon_cross_gray.svg"
+                                    onMouseDown={handleHistoryDel}
+                                />
+                            </SearchHistoryContainer>
+                            <SearchHistoryContainer>
+                                <SearchHistoryIcon src="/imgs/icon_search.svg" />
+                                <SearchHistoryText>
+                                    꽁꽁 얼어붙은
+                                </SearchHistoryText>
+                                <SearchHistoryDelIcon
+                                    src="/imgs/icon_cross_gray.svg"
+                                    onMouseDown={handleHistoryDel}
+                                />
+                            </SearchHistoryContainer>
                         </SearchHistoryTexts>
                     </SearchHistory>
                 )}
@@ -409,7 +480,7 @@ function Header({ isOther }) {
                         <TitleIcon
                             src="/imgs/mememoaLogo.svg"
                             onClick={moveMainPage}
-                            style={{ "margin-left": "0" }}
+                            style={{ marginLeft: "0" }}
                         />
                         <img
                             src="imgs/logout.svg"
