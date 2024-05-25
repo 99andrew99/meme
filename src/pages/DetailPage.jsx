@@ -108,6 +108,7 @@ const SharePopupContainer = styled.div`
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 12 rgba(0, 0, 0, 0.4);
 `;
 
 const SharePopupText = styled.span`

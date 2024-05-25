@@ -4,18 +4,12 @@ import styled from "styled-components";
 
 const TopContainer = styled.div`
     width: 100vw;
-    /* 화면이 딱 맞게 늘어나게 하려면 높이를 픽스하면 안됨 */
-    /* height: 150vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     size: 30px;
     background-color: black;
-
-    @media (min-height: 900px) {
-        /* height: 100vh; */
-    }
 `;
 
 const MainContainer = styled.div`
@@ -25,11 +19,7 @@ const MainContainer = styled.div`
     flex-direction: column;
     background-color: white;
     position: relative;
-    /* overflow-y: scroll; */
     box-sizing: border-box;
-    /* padding-left: 20px;
-    padding-right: 20px; */
-
     @media (max-width: 480px) {
         width: 100vw;
     }
@@ -37,14 +27,11 @@ const MainContainer = styled.div`
 
 const HeaderContainer = styled.div`
     width: 100%;
-    /* height: 5vh; */
     background-color: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    /* padding-left: 20px;
-    padding-right: 20px; */
     box-sizing: border-box;
 `;
 
@@ -69,31 +56,17 @@ const PageTitle = styled.span`
     margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
-
     @media (max-width: 480px) {
         font-size: 1rem;
     }
 `;
 
-const CheckIcon = styled.img`
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-
-    @media (max-width: 480px) {
-        width: 24px;
-        height: 24px;
-    }
-`;
-
 const MemeTitle = styled.input`
-    /* height: 7vh; */
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #e3e3e3;
     font-size: 1.4rem;
     font-weight: 500;
-    /* box-sizing: border-box; */
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
@@ -105,28 +78,11 @@ const MemeTitle = styled.input`
 
 const UploadContainer = styled.div`
     width: 100%;
-    /* height: ${(props) => (props.hasFile ? "55vh" : "40vh")}; */
     border-bottom: 1px solid #e3e3e3;
     display: flex;
     flex-direction: column;
-    /* background-color: tomato; */
     justify-content: space-between;
-    /* padding-top: 20px; */
     box-sizing: border-box;
-    /* padding-left: 100px;
-    padding-right: 100px; */
-    /* padding-bottom: 20px; */
-
-    @media (max-width: 470px) {
-        /* padding-left: 75px;
-        padding-right: 75px; */
-    }
-`;
-
-const UploadTitle = styled.span`
-    font-size: 1rem;
-    font-weight: 500;
-    /* margin-top: 10px; */
 `;
 
 const UploadFileContainer = styled.div`
@@ -135,7 +91,6 @@ const UploadFileContainer = styled.div`
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    /* box-sizing: border-box; */
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 75px;
@@ -156,7 +111,6 @@ const UploadFileIcon = styled.img`
 `;
 
 const UploadText = styled.textarea`
-    /* height: 6vh; */
     font-size: 0.9rem;
     font-weight: 400;
     background-color: #eeeeee;
@@ -172,19 +126,11 @@ const UploadText = styled.textarea`
 
 const UploadedImageContainer = styled.div`
     position: relative;
-    /* margin-top: 10px; */
     box-sizing: border-box;
-    /* padding: 15px; */
-
-    /* height: 20vh; */
-    /* height: 100%; */
-
     img {
         box-sizing: border-box;
         width: 100%;
         height: 242.9px;
-
-        /* border-radius: 10px; */
     }
 `;
 
@@ -192,7 +138,6 @@ const DeleteButton = styled.button`
     position: absolute;
     top: 0;
     right: 0;
-
     background-color: white;
     color: black;
     border: 1px solid black;
@@ -200,7 +145,6 @@ const DeleteButton = styled.button`
     width: 24px;
     height: 24px;
     cursor: pointer;
-
     &:hover {
         background-color: black;
         color: white;
@@ -210,22 +154,16 @@ const DeleteButton = styled.button`
 const CategoryContainer = styled.div`
     display: flex;
     flex-direction: column;
-    /* height: 20vh; */
     justify-content: space-around;
-    /* margin-top: 20px; */
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
     border-bottom: 12px solid #e3e3e3;
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
-
-    @media (max-height: 700px) {
-        /* height: 25vh; */
-    }
 `;
 
-const CategoryTitle = styled(UploadTitle)`
+const CategoryTitle = styled.span`
+    font-size: 1rem;
+    font-weight: 500;
     margin-top: 20px;
     margin-bottom: 10px;
 `;
@@ -236,6 +174,7 @@ const Categories = styled.div`
     gap: 10px;
     margin-bottom: 20px;
 `;
+
 const Category = styled.div`
     width: 105px;
     height: 42px;
@@ -252,23 +191,21 @@ const Category = styled.div`
 const TagContainer = styled.div`
     display: flex;
     flex-direction: column;
-    /* height: 30vh; */
-    /* background-color: tomato; */
-
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
 `;
 
 const TagTitleContainer = styled.div`
-    /* height: 5vh; */
     display: flex;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 10px;
 `;
 
-const TagTitle = styled(UploadTitle)`
+const TagTitle = styled.span`
+    font-size: 1rem;
+    font-weight: 500;
     margin-top: 0;
 `;
 
@@ -279,7 +216,6 @@ const TagTitleInfo = styled.span`
 `;
 
 const TagInputContainer = styled.div`
-    /* height: 6vh; */
     background-color: #eeeeee;
     border-radius: 10px;
     box-sizing: border-box;
@@ -292,6 +228,7 @@ const TagInputContainer = styled.div`
     margin-bottom: 10px;
     height: 40px;
 `;
+
 const TagInput = styled.input`
     background-color: transparent;
     width: 80%;
@@ -334,10 +271,7 @@ const TagDelIcon = styled.img`
     cursor: pointer;
 `;
 
-const UploadFileIcon2 = styled.img``;
-
 const MemeInfoContainer = styled.div`
-    /* height: 15vh; */
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
@@ -347,13 +281,14 @@ const MemeInfoContainer = styled.div`
     border-bottom: 12px solid #e3e3e3;
 `;
 
-const MemeInfoText = styled(UploadTitle)`
+const MemeInfoText = styled.span`
+    font-size: 1rem;
+    font-weight: 500;
     margin-top: 20px;
     margin-bottom: 10px;
 `;
 
 const SubmitContainer = styled.div`
-    /* height: 12.5 vh; */
     box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
@@ -372,7 +307,6 @@ const SubmitBtn = styled.div`
     justify-content: center;
     border-radius: 10px;
     background-color: #e9e9e9;
-
     cursor: pointer;
     color: #7b7b7b;
     &:hover {
@@ -385,8 +319,10 @@ const SubmitText = styled.span``;
 
 function CreateContentPage() {
     const navigate = useNavigate();
+    const [memeTitle, setMemeTitle] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
-    const [filerUrl, setFileUrl] = useState(null);
+    const [fileUrl, setFileUrl] = useState(null);
+    const [uploadText, setUploadText] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [tags, setTags] = useState([]);
     const [inputTag, setInputTag] = useState("");
@@ -417,19 +353,17 @@ function CreateContentPage() {
     };
 
     const handleCreateTag = () => {
-        if (inputTag.trim().length > 10) {
-            alert("10글자 초과");
+        if (inputTag.trim().length > 20) {
+            alert("20글자 초과입니다.");
             return;
         }
         if (inputTag.trim() !== "") {
             if (tags.includes(inputTag)) {
-                alert("동일한 태그 존재");
+                alert("동일한 태그가 존재합니다.");
                 return;
             }
-
             setTags((prev) => [...prev, inputTag]);
             setInputTag("");
-            console.log("지금까지의 태그들: ", tags);
         }
     };
 
@@ -439,8 +373,48 @@ function CreateContentPage() {
 
     const handleTagDelete = (tag) => {
         const newArray = tags.filter((item) => item !== tag);
-        // console.log(newArray);
         setTags(newArray);
+    };
+
+    const handleMemeTitleChange = (event) => {
+        setMemeTitle(event.target.value);
+    };
+
+    const handleUploadTextChange = (event) => {
+        setUploadText(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (!memeTitle) {
+            alert("밈 제목을 입력해주세요.");
+            return;
+        }
+        if (!selectedFile) {
+            alert("밈 파일을 업로드 해주세요.");
+            return;
+        }
+        if (!uploadText) {
+            alert("밈 설명을 입력해주세요.");
+            return;
+        }
+        if (!selectedCategory) {
+            alert("카테고리를 선택해주세요.");
+            return;
+        }
+        if (tags.length === 0) {
+            alert("태그를 하나 이상 추가해주세요.");
+            return;
+        }
+
+        const memeData = {
+            memeTitle,
+            fileUrl,
+            uploadText,
+            selectedCategory,
+            tags,
+        };
+
+        console.log(JSON.stringify(memeData));
     };
 
     return (
@@ -452,17 +426,18 @@ function CreateContentPage() {
                         onClick={() => handleMoveMainpage()}
                     />
                     <PageTitle>밈 등록하기</PageTitle>
-                    {/* <CheckIcon src="imgs/fi-rr-check.svg" /> */}
                 </HeaderContainer>
 
-                <MemeTitle placeholder="밈이름을 입력해주세요." />
+                <MemeTitle
+                    placeholder="밈이름을 입력해주세요."
+                    value={memeTitle}
+                    onChange={handleMemeTitleChange}
+                />
 
-                {/* 이미지가 업로드 되면 55vh, 아니면 40vh */}
-                {/* !! 는 불리언 값으면 변환하는 방법  */}
-                <UploadContainer hasFile={!!selectedFile}>
-                    {!filerUrl && (
+                <UploadContainer>
+                    {!fileUrl && (
                         <UploadFileContainer onClick={handleFileUploadClick}>
-                            <UploadFileIcon2 src="/imgs/imageIcon.svg" />
+                            <UploadFileIcon src="/imgs/imageIcon.svg" />
                             <UploadFileText
                                 style={{
                                     color: "#9D9D9D",
@@ -481,7 +456,6 @@ function CreateContentPage() {
                             >
                                 (png,jpg 형식)
                             </UploadFileText>
-                            {/* <UploadFileIcon src="imgs/fi-rr-upload.svg" /> */}
                         </UploadFileContainer>
                     )}
 
@@ -492,9 +466,9 @@ function CreateContentPage() {
                         style={{ display: "none" }}
                         onChange={handleFileChange}
                     />
-                    {filerUrl && (
+                    {fileUrl && (
                         <UploadedImageContainer>
-                            <img src={filerUrl} alt="uploadImg" />
+                            <img src={fileUrl} alt="uploadImg" />
                             <DeleteButton onClick={handleFileDelete}>
                                 x
                             </DeleteButton>
@@ -504,7 +478,11 @@ function CreateContentPage() {
 
                 <MemeInfoContainer>
                     <MemeInfoText>밈 설명</MemeInfoText>
-                    <UploadText placeholder="밈에 대한 세부 설명들을 적어주세요." />
+                    <UploadText
+                        placeholder="밈에 대한 세부 설명들을 적어주세요."
+                        value={uploadText}
+                        onChange={handleUploadTextChange}
+                    />
                 </MemeInfoContainer>
 
                 <CategoryContainer>
@@ -534,7 +512,7 @@ function CreateContentPage() {
                     <TagInputContainer>
                         <TagInput
                             id="inputTag"
-                            placeholder="태그를 추가해주세요 (1~10글자)"
+                            placeholder="태그를 추가해주세요 (1~20글자)"
                             onChange={handleInputChange}
                             value={inputTag}
                         />
@@ -558,7 +536,7 @@ function CreateContentPage() {
                     </Tags>
                 </TagContainer>
                 <SubmitContainer>
-                    <SubmitBtn onClick={handleMoveMainpage}>
+                    <SubmitBtn onClick={handleSubmit}>
                         <SubmitText>등록하기</SubmitText>
                     </SubmitBtn>
                 </SubmitContainer>
