@@ -11,9 +11,11 @@ const TopContainer = styled.div`
 
 const ContentsHeader = styled.div`
     width: 100%;
-    height: 8vh;
+    /* height: 8vh; */
     display: flex;
     align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 `;
 
 const ContentsContainer = styled.div`

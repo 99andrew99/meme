@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const CategoryContainer = styled.div`
     width: 100%;
-    padding-top: 30px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     display: flex;
     align-items: center;
     white-space: nowrap;

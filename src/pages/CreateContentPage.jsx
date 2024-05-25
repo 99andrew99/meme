@@ -415,6 +415,8 @@ function CreateContentPage() {
         };
 
         console.log(JSON.stringify(memeData));
+
+        // navigate(-1);
     };
 
     return (
