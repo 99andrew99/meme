@@ -134,7 +134,7 @@ const SearchHistoryContainer = styled.div`
     padding-bottom: 10px;
 
     &:hover {
-        background-color: #d4d4d4;
+        /* background-color: #d4d4d4; */
     }
 `;
 
@@ -387,6 +387,11 @@ function Header({ isOther }) {
         }
     };
 
+    const handleHistoryMove = (searchInput) => {
+        setIsFocus(false);
+        navigate(`/search/${searchInput}`);
+    };
+
     const getRandomPlaceholder = () => {
         const placeholders = [
             "‘무도 유니버스’ 검색해보는 건 어때요?",
@@ -451,7 +456,11 @@ function Header({ isOther }) {
                         </SearchHistoryHeader>
 
                         <SearchHistoryTexts>
-                            <SearchHistoryContainer>
+                            <SearchHistoryContainer
+                                onClick={() =>
+                                    handleHistoryMove("꽁꽁 얼어붙은")
+                                }
+                            >
                                 <SearchHistoryIcon src="/imgs/icon_search.svg" />
                                 <SearchHistoryText>
                                     꽁꽁 얼어붙은
@@ -461,21 +470,23 @@ function Header({ isOther }) {
                                     onMouseDown={handleHistoryDel}
                                 />
                             </SearchHistoryContainer>
-                            <SearchHistoryContainer>
+                            <SearchHistoryContainer
+                                onClick={() => handleHistoryMove("시민을 위해")}
+                            >
                                 <SearchHistoryIcon src="/imgs/icon_search.svg" />
                                 <SearchHistoryText>
-                                    꽁꽁 얼어붙은
+                                    시민을 위해
                                 </SearchHistoryText>
                                 <SearchHistoryDelIcon
                                     src="/imgs/icon_cross_gray.svg"
                                     onMouseDown={handleHistoryDel}
                                 />
                             </SearchHistoryContainer>
-                            <SearchHistoryContainer>
+                            <SearchHistoryContainer
+                                onClick={() => handleHistoryMove("군침이 싹")}
+                            >
                                 <SearchHistoryIcon src="/imgs/icon_search.svg" />
-                                <SearchHistoryText>
-                                    꽁꽁 얼어붙은
-                                </SearchHistoryText>
+                                <SearchHistoryText>군침이 싹</SearchHistoryText>
                                 <SearchHistoryDelIcon
                                     src="/imgs/icon_cross_gray.svg"
                                     onMouseDown={handleHistoryDel}

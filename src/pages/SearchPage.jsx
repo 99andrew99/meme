@@ -16,6 +16,7 @@ const TopContainer = styled.div`
     color: white;
     size: 30px;
     background-color: black;
+    /* overflow-y: hidden; */
 `;
 
 const MainContainer = styled.div`
@@ -37,7 +38,7 @@ function SearchPage() {
                 <Header isOther={true} />
                 <Categories />
                 {/* <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn> */}
-                <Contents isHeader={false} />
+                <Contents isHeader={true} />
 
                 <FloatingBtn />
             </MainContainer>

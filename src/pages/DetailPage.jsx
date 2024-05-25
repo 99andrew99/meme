@@ -90,18 +90,42 @@ const Tag = styled.div`
     font-size: 0.9rem;
 `;
 
-const SharePopup = styled.div`
+const SharePopupContainer = styled.div`
+    width: 292px;
+    /* height: 128px; */
+    /* height: 5vh; */
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    position: absolute;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+const SharePopupText = styled.span`
+    font-size: 14px;
+`;
+
+const SharePopupBtn = styled.div`
+    margin-top: 20px;
     width: 100%;
-    height: 5vh;
-    background-color: black;
-    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
 `;
 
 const CategoryContainer = styled.div`
@@ -172,10 +196,10 @@ function DetailPage() {
 
     const handlePrepare = () => {
         setIsPrepare(true);
+    };
 
-        setTimeout(() => {
-            setIsPrepare(false);
-        }, 3000);
+    const handleClosePrepare = () => {
+        setIsPrepare(false);
     };
 
     const handleMoveBack = () => {
@@ -212,11 +236,29 @@ function DetailPage() {
                     </IconContainer>
                 </Header>
 
-                {isShare && <SharePopup>링크가 공유되었습니다.</SharePopup>}
+                {isShare && (
+                    <SharePopupContainer
+                        style={{
+                            fontSize: "20px",
+                            paddingTop: "20px",
+                            paddingBottom: "20px",
+                        }}
+                    >
+                        링크가 공유되었습니다.
+                    </SharePopupContainer>
+                )}
                 {isPrepare && (
-                    <SharePopup>
-                        아이~ 씨X 시민을 위해 일하고 있었는데 미치겠다!
-                    </SharePopup>
+                    <SharePopupContainer>
+                        <SharePopupText style={{ marginTop: "20px" }}>
+                            어? 뭐야! 아~ 씨X!!
+                        </SharePopupText>
+                        <SharePopupText>
+                            서비스를 위해 만들고 있는 중인데 미치겠다.
+                        </SharePopupText>
+                        <SharePopupBtn onClick={handleClosePrepare}>
+                            어어..; 그래 수고해
+                        </SharePopupBtn>
+                    </SharePopupContainer>
                 )}
 
                 <CategoryContainer onClick={() => handleMoveCategory("웃김")}>
