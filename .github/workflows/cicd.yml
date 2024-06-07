@@ -1,0 +1,42 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to server
+        if: github.ref == 'refs/heads/main'
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}  # 비밀번호
+          USER: ${{ secrets.USER }}  # 서버의 사용자 이름
+          SERVER_IP: ${{ secrets.SERVER_IP }}  # 서버의 공인 IP 주소
+          FRONTEND_DEPLOY_PATH: ${{ secrets.FRONTEND_DEPLOY_PATH }}  # 서버의 프론트엔드 배포 경로
+          PORT: ${{ secrets.PORT }}  # 서버의 SSH 포트 번호
+        run: |
+          echo "${SSH_PASSWORD}" | sshpass -p "${SSH_PASSWORD}" scp -P $PORT -o StrictHostKeyChecking=no -r build/* $USER@$SERVER_IP:$FRONTEND_DEPLOY_PATH
+          echo "${SSH_PASSWORD}" | sshpass -p "${SSH_PASSWORD}" ssh -p $PORT -o StrictHostKeyChecking=no $USER@$SERVER_IP << EOF
+            sudo systemctl restart nginx
+          EOF
